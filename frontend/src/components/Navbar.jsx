@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
 import { FiMenu, FiX, FiUser, FiLogOut, FiSettings, FiSearch, FiShoppingBag } from 'react-icons/fi'
 import SearchModal from './SearchModal'
@@ -9,376 +10,244 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [dropdownTimeout, setDropdownTimeout] = useState(null)
   const { isAuthenticated, user, logout } = useAuth()
   const location = useLocation()
 
   const navigation = [
     { 
-      name: 'Store', 
-      href: '/store', 
-      current: location.pathname === '/store',
+      name: 'Home', 
+      href: '/', 
+      current: location.pathname === '/',
       dropdown: {
         sections: [
           {
-            title: 'Shop',
+            title: 'Welcome',
             items: [
-              { name: 'Shop the Latest', href: '/store/latest' },
-              { name: 'Mac', href: '/store/mac' },
-              { name: 'iPad', href: '/store/ipad' },
-              { name: 'iPhone', href: '/store/iphone' },
-              { name: 'Apple Watch', href: '/store/watch' },
-              { name: 'Accessories', href: '/store/accessories' }
+              { name: 'About Me', href: '/about' },
+              { name: 'My Story', href: '/story' },
+              { name: 'Skills Overview', href: '/skills' },
+              { name: 'Latest Updates', href: '/updates' }
             ]
           },
           {
             title: 'Quick Links',
             items: [
-              { name: 'Find a Store', href: '/store/locations' },
-              { name: 'Order Status', href: '/store/order-status' },
-              { name: 'Ways to Buy', href: '/store/ways-to-buy' },
-              { name: 'Personal Setup', href: '/store/personal-setup' },
-              { name: 'College Student Offer', href: '/store/education' }
-            ]
-          },
-          {
-            title: 'Shop Special Stores',
-            items: [
-              { name: 'Education', href: '/store/education' },
-              { name: 'Business', href: '/store/business' }
+              { name: 'Portfolio Highlights', href: '/highlights' },
+              { name: 'Recent Work', href: '/recent' },
+              { name: 'Contact Info', href: '/contact-info' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'Mac', 
-      href: '/mac', 
-      current: location.pathname === '/mac',
+      name: 'Journey', 
+      href: '/journey', 
+      current: location.pathname === '/journey',
       dropdown: {
         sections: [
           {
-            title: 'Explore Mac',
+            title: 'Career Path',
             items: [
-              { name: 'Explore All Mac', href: '/mac' },
-              { name: 'MacBook Air', href: '/mac/macbook-air' },
-              { name: 'MacBook Pro', href: '/mac/macbook-pro' },
-              { name: 'iMac', href: '/mac/imac' },
-              { name: 'Mac mini', href: '/mac/mac-mini' },
-              { name: 'Mac Studio', href: '/mac/mac-studio' },
-              { name: 'Mac Pro', href: '/mac/mac-pro' }
+              { name: 'Education', href: '/journey/education' },
+              { name: 'Work Experience', href: '/journey/experience' },
+              { name: 'Achievements', href: '/journey/achievements' },
+              { name: 'Certifications', href: '/journey/certifications' }
             ]
           },
           {
-            title: 'Shop Mac',
+            title: 'Learning',
             items: [
-              { name: 'Shop Mac', href: '/mac/shop' },
-              { name: 'Mac Accessories', href: '/mac/accessories' },
-              { name: 'Trade In', href: '/mac/trade-in' },
-              { name: 'Financing', href: '/mac/financing' }
-            ]
-          },
-          {
-            title: 'More from Mac',
-            items: [
-              { name: 'Mac Support', href: '/mac/support' },
-              { name: 'macOS Sequoia', href: '/mac/macos' },
-              { name: 'Apps by Apple', href: '/mac/apps' },
-              { name: 'Continuity', href: '/mac/continuity' }
+              { name: 'Tech Stack', href: '/journey/tech-stack' },
+              { name: 'Courses', href: '/journey/courses' },
+              { name: 'Workshops', href: '/journey/workshops' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'iPad', 
-      href: '/ipad', 
-      current: location.pathname === '/ipad',
+      name: 'Project', 
+      href: '/project', 
+      current: location.pathname === '/project',
       dropdown: {
         sections: [
           {
-            title: 'Explore iPad',
+            title: 'Featured Projects',
             items: [
-              { name: 'Explore All iPad', href: '/ipad' },
-              { name: 'iPad Pro', href: '/ipad/ipad-pro' },
-              { name: 'iPad Air', href: '/ipad/ipad-air' },
-              { name: 'iPad', href: '/ipad/ipad' },
-              { name: 'iPad mini', href: '/ipad/ipad-mini' },
-              { name: 'Apple Pencil', href: '/ipad/apple-pencil' },
-              { name: 'Keyboards', href: '/ipad/keyboards' }
+              { name: 'Web Applications', href: '/projects/web-apps' },
+              { name: 'Mobile Apps', href: '/projects/mobile' },
+              { name: 'Full Stack Projects', href: '/projects/full-stack' },
+              { name: 'Open Source', href: '/projects/open-source' }
             ]
           },
           {
-            title: 'Shop iPad',
+            title: 'Technologies',
             items: [
-              { name: 'Shop iPad', href: '/ipad/shop' },
-              { name: 'iPad Accessories', href: '/ipad/accessories' },
-              { name: 'Trade In', href: '/ipad/trade-in' },
-              { name: 'Financing', href: '/ipad/financing' }
-            ]
-          },
-          {
-            title: 'More from iPad',
-            items: [
-              { name: 'iPad Support', href: '/ipad/support' },
-              { name: 'iPadOS', href: '/ipad/ipados' },
-              { name: 'Apps by Apple', href: '/ipad/apps' },
-              { name: 'iCloud', href: '/ipad/icloud' }
+              { name: 'React Projects', href: '/projects/react' },
+              { name: 'Node.js Projects', href: '/projects/nodejs' },
+              { name: 'Python Projects', href: '/projects/python' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'iPhone', 
-      href: '/iphone', 
-      current: location.pathname === '/iphone',
+      name: 'Work', 
+      href: '/work', 
+      current: location.pathname === '/work',
       dropdown: {
         sections: [
           {
-            title: 'Explore iPhone',
+            title: 'Professional Experience',
             items: [
-              { name: 'Explore All iPhone', href: '/iphone' },
-              { name: 'iPhone 16 Pro', href: '/iphone/iphone-16-pro' },
-              { name: 'iPhone 16', href: '/iphone/iphone-16' },
-              { name: 'iPhone 15', href: '/iphone/iphone-15' },
-              { name: 'iPhone 14', href: '/iphone/iphone-14' },
-              { name: 'iPhone SE', href: '/iphone/iphone-se' }
+              { name: 'Current Role', href: '/work/current' },
+              { name: 'Previous Positions', href: '/work/previous' },
+              { name: 'Freelance Work', href: '/work/freelance' },
+              { name: 'Collaborations', href: '/work/collaborations' }
             ]
           },
           {
-            title: 'Shop iPhone',
+            title: 'Services',
             items: [
-              { name: 'Shop iPhone', href: '/iphone/shop' },
-              { name: 'iPhone Accessories', href: '/iphone/accessories' },
-              { name: 'Apple Trade In', href: '/iphone/trade-in' },
-              { name: 'Carrier Deals', href: '/iphone/carriers' },
-              { name: 'Financing', href: '/iphone/financing' }
-            ]
-          },
-          {
-            title: 'More from iPhone',
-            items: [
-              { name: 'iPhone Support', href: '/iphone/support' },
-              { name: 'iOS 18', href: '/iphone/ios' },
-              { name: 'Apps by Apple', href: '/iphone/apps' },
-              { name: 'iPhone Privacy', href: '/iphone/privacy' }
+              { name: 'Web Development', href: '/work/web-dev' },
+              { name: 'Consulting', href: '/work/consulting' },
+              { name: 'Code Reviews', href: '/work/reviews' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'Watch', 
-      href: '/watch', 
-      current: location.pathname === '/watch',
+      name: 'Know Me', 
+      href: '/know-me', 
+      current: location.pathname === '/know-me',
       dropdown: {
         sections: [
           {
-            title: 'Explore Watch',
+            title: 'Personal',
             items: [
-              { name: 'Explore All Apple Watch', href: '/watch' },
-              { name: 'Apple Watch Series 10', href: '/watch/series-10' },
-              { name: 'Apple Watch Ultra 2', href: '/watch/ultra' },
-              { name: 'Apple Watch SE', href: '/watch/se' },
-              { name: 'Apple Watch Nike', href: '/watch/nike' },
-              { name: 'Apple Watch Hermès', href: '/watch/hermes' }
+              { name: 'About Vicky', href: '/know-me/about' },
+              { name: 'Interests', href: '/know-me/interests' },
+              { name: 'Hobbies', href: '/know-me/hobbies' },
+              { name: 'Values', href: '/know-me/values' }
             ]
           },
           {
-            title: 'Shop Watch',
+            title: 'Connect',
             items: [
-              { name: 'Shop Apple Watch', href: '/watch/shop' },
-              { name: 'Apple Watch Studio', href: '/watch/studio' },
-              { name: 'Apple Watch Bands', href: '/watch/bands' },
-              { name: 'Apple Watch Accessories', href: '/watch/accessories' },
-              { name: 'Trade In', href: '/watch/trade-in' }
-            ]
-          },
-          {
-            title: 'More from Watch',
-            items: [
-              { name: 'Apple Watch Support', href: '/watch/support' },
-              { name: 'watchOS', href: '/watch/watchos' },
-              { name: 'Apps by Apple', href: '/watch/apps' }
+              { name: 'Social Media', href: '/know-me/social' },
+              { name: 'Blog', href: '/know-me/blog' },
+              { name: 'Newsletter', href: '/know-me/newsletter' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'AirPods', 
-      href: '/airpods', 
-      current: location.pathname === '/airpods',
+      name: 'Vic-Story', 
+      href: '/vic-story', 
+      current: location.pathname === '/vic-story',
       dropdown: {
         sections: [
           {
-            title: 'Explore AirPods',
+            title: 'My Journey',
             items: [
-              { name: 'Explore All AirPods', href: '/airpods' },
-              { name: 'AirPods 4', href: '/airpods/airpods-4' },
-              { name: 'AirPods Pro 2', href: '/airpods/airpods-pro' },
-              { name: 'AirPods Max', href: '/airpods/airpods-max' },
-              { name: 'AirPods 3', href: '/airpods/airpods-3' }
+              { name: 'Origin Story', href: '/vic-story/origin' },
+              { name: 'Milestones', href: '/vic-story/milestones' },
+              { name: 'Challenges', href: '/vic-story/challenges' },
+              { name: 'Growth', href: '/vic-story/growth' }
             ]
           },
           {
-            title: 'Shop AirPods',
+            title: 'Behind the Scenes',
             items: [
-              { name: 'Shop AirPods', href: '/airpods/shop' },
-              { name: 'AirPods Accessories', href: '/airpods/accessories' }
-            ]
-          },
-          {
-            title: 'More from AirPods',
-            items: [
-              { name: 'AirPods Support', href: '/airpods/support' },
-              { name: 'Hearing Health', href: '/airpods/hearing-health' },
-              { name: 'Apple Music', href: '/airpods/apple-music' }
+              { name: 'Daily Routine', href: '/vic-story/routine' },
+              { name: 'Inspiration', href: '/vic-story/inspiration' },
+              { name: 'Future Goals', href: '/vic-story/goals' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'TV & Home', 
-      href: '/tv-home', 
-      current: location.pathname === '/tv-home',
+      name: 'Resume', 
+      href: '/resume', 
+      current: location.pathname === '/resume',
       dropdown: {
         sections: [
           {
-            title: 'Explore TV & Home',
+            title: 'Documents',
             items: [
-              { name: 'Explore TV & Home', href: '/tv-home' },
-              { name: 'Apple TV 4K', href: '/tv-home/apple-tv-4k' },
-              { name: 'HomePod', href: '/tv-home/homepod' },
-              { name: 'HomePod mini', href: '/tv-home/homepod-mini' }
+              { name: 'View Resume', href: '/resume/view' },
+              { name: 'Download PDF', href: '/resume/download' },
+              { name: 'Print Version', href: '/resume/print' },
+              { name: 'References', href: '/resume/references' }
             ]
           },
           {
-            title: 'Shop TV & Home',
+            title: 'Details',
             items: [
-              { name: 'Shop TV & Home', href: '/tv-home/shop' },
-              { name: 'TV & Home Accessories', href: '/tv-home/accessories' }
-            ]
-          },
-          {
-            title: 'More from TV & Home',
-            items: [
-              { name: 'Apple TV Support', href: '/tv-home/support' },
-              { name: 'HomePod Support', href: '/tv-home/homepod-support' },
-              { name: 'Apple TV app', href: '/tv-home/tv-app' },
-              { name: 'Apple TV+', href: '/tv-home/tv-plus' },
-              { name: 'Home app', href: '/tv-home/home-app' },
-              { name: 'Apple Music', href: '/tv-home/apple-music' },
-              { name: 'Siri', href: '/tv-home/siri' }
+              { name: 'Skills Summary', href: '/resume/skills' },
+              { name: 'Work History', href: '/resume/work-history' },
+              { name: 'Education', href: '/resume/education' }
             ]
           }
         ]
       }
     },
     { 
-      name: 'Entertainment', 
-      href: '/entertainment', 
-      current: location.pathname === '/entertainment',
+      name: 'Connect', 
+      href: '/connect', 
+      current: location.pathname === '/connect',
       dropdown: {
         sections: [
           {
-            title: 'Explore Entertainment',
+            title: 'Get In Touch',
             items: [
-              { name: 'Explore Entertainment', href: '/entertainment' },
-              { name: 'Apple One', href: '/entertainment/apple-one' },
-              { name: 'Apple TV+', href: '/entertainment/tv-plus' },
-              { name: 'Apple Music', href: '/entertainment/apple-music' },
-              { name: 'Apple Arcade', href: '/entertainment/apple-arcade' },
-              { name: 'Apple Fitness+', href: '/entertainment/fitness-plus' },
-              { name: 'Apple News+', href: '/entertainment/news-plus' },
-              { name: 'Apple Podcasts', href: '/entertainment/podcasts' },
-              { name: 'Apple Books', href: '/entertainment/books' }
+              { name: 'Contact Form', href: '/connect/contact' },
+              { name: 'Email Me', href: '/connect/email' },
+              { name: 'Schedule Meeting', href: '/connect/meeting' },
+              { name: 'Collaboration', href: '/connect/collaboration' }
             ]
           },
           {
-            title: 'Support',
+            title: 'Social & Professional',
             items: [
-              { name: 'Apple TV+ Support', href: '/entertainment/tv-plus-support' },
-              { name: 'Apple Music Support', href: '/entertainment/music-support' }
+              { name: 'LinkedIn', href: '/connect/linkedin' },
+              { name: 'GitHub', href: '/connect/github' },
+              { name: 'Twitter', href: '/connect/twitter' }
             ]
           }
         ]
       }
-    },
-    { 
-      name: 'Accessories', 
-      href: '/accessories', 
-      current: location.pathname === '/accessories',
-      dropdown: {
-        sections: [
-          {
-            title: 'Shop Accessories',
-            items: [
-              { name: 'Shop All Accessories', href: '/accessories' },
-              { name: 'Mac Accessories', href: '/accessories/mac' },
-              { name: 'iPad Accessories', href: '/accessories/ipad' },
-              { name: 'iPhone Accessories', href: '/accessories/iphone' },
-              { name: 'Apple Watch Accessories', href: '/accessories/watch' },
-              { name: 'AirPods Accessories', href: '/accessories/airpods' },
-              { name: 'TV & Home Accessories', href: '/accessories/tv-home' }
-            ]
-          },
-          {
-            title: 'Explore Accessories',
-            items: [
-              { name: 'Made by Apple', href: '/accessories/made-by-apple' },
-              { name: 'Beats by Dr. Dre', href: '/accessories/beats' },
-              { name: 'AirTag', href: '/accessories/airtag' }
-            ]
-          }
-        ]
-      }
-    },
-    { 
-      name: 'Support', 
-      href: '/support', 
-      current: location.pathname === '/support',
-      dropdown: {
-        sections: [
-          {
-            title: 'Explore Support',
-            items: [
-              { name: 'iPhone', href: '/support/iphone' },
-              { name: 'Mac', href: '/support/mac' },
-              { name: 'iPad', href: '/support/ipad' },
-              { name: 'Apple Watch', href: '/support/watch' },
-              { name: 'AirPods', href: '/support/airpods' },
-              { name: 'Music', href: '/support/music' },
-              { name: 'TV', href: '/support/tv' }
-            ]
-          },
-          {
-            title: 'Get Help',
-            items: [
-              { name: 'Community', href: '/support/community' },
-              { name: 'Check Coverage', href: '/support/coverage' },
-              { name: 'Repair', href: '/support/repair' },
-              { name: 'Contact Us', href: '/support/contact' }
-            ]
-          },
-          {
-            title: 'Helpful Topics',
-            items: [
-              { name: 'Get Help Online', href: '/support/help-online' },
-              { name: 'Billing & Subscriptions', href: '/support/billing' },
-              { name: 'Find My', href: '/support/find-my' },
-              { name: 'Accessibility', href: '/support/accessibility' }
-            ]
-          }
-        ]
-      }
-    },
+    }
   ]
 
   const handleLogout = () => {
     logout()
     setIsDropdownOpen(false)
+  }
+
+  const handleDropdownEnter = (itemName) => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout)
+    }
+    setActiveDropdown(itemName)
+  }
+
+  const handleDropdownLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveDropdown(null)
+    }, 150) // 150ms delay before closing
+    setDropdownTimeout(timeout)
+  }
+
+  const handleMegaDropdownEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout)
+    }
   }
 
   // Close dropdown when clicking outside and handle keyboard shortcuts
@@ -410,8 +279,12 @@ const Navbar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('keydown', handleKeyDown)
+      // Clean up any pending timeout
+      if (dropdownTimeout) {
+        clearTimeout(dropdownTimeout)
+      }
     }
-  }, [isDropdownOpen, activeDropdown, isSearchOpen])
+  }, [isDropdownOpen, activeDropdown, isSearchOpen, dropdownTimeout])
 
   return (
     <>
@@ -423,10 +296,11 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-11">
             {/* Apple Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="text-gray-900 hover:text-gray-600 transition-colors duration-200">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.13997 6.91 8.85997 6.88C10.15 6.86 11.35 7.75 12.1 7.75C12.83 7.75 14.28 6.68 15.85 6.84C16.48 6.87 18.28 7.12 19.44 8.93C19.36 8.99 17.96 9.85 17.97 11.83C17.99 14.21 19.93 14.99 20 15.01C19.99 15.07 19.67 16.16 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+              <Link to="/" className="text-gray-900 hover:text-gray-600 transition-all duration-200 transform hover:scale-110">
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                 </svg>
+                <span className="sr-only">Home</span>
               </Link>
             </div>
 
@@ -437,15 +311,17 @@ const Navbar = () => {
                   <div
                     key={item.name}
                     className="relative mega-dropdown"
-                    onMouseEnter={() => setActiveDropdown(item.name)}
-                    onMouseLeave={() => setActiveDropdown(null)}
+                    onMouseEnter={() => handleDropdownEnter(item.name)}
+                    onMouseLeave={handleDropdownLeave}
                   >
                     <Link
                       to={item.href}
-                      className="text-xs font-normal text-gray-800 hover:text-black transition-colors duration-200 whitespace-nowrap py-2"
+                      className="text-xs font-normal text-gray-800 hover:text-black transition-all duration-200 whitespace-nowrap py-2 relative group hover:scale-105"
                       style={{ fontSize: '12px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                     >
                       {item.name}
+                      {/* Hover underline effect */}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
                     </Link>
                   </div>
                 ))}
@@ -457,7 +333,7 @@ const Navbar = () => {
               {/* Search Icon */}
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="text-gray-800 hover:text-black transition-colors duration-200 relative group"
+                className="text-gray-800 hover:text-black transition-all duration-200 relative group transform hover:scale-110"
                 title="Search (⌘K)"
               >
                 <FiSearch className="h-4 w-4" />
@@ -468,7 +344,7 @@ const Navbar = () => {
               </button>
               
               {/* Shopping Bag */}
-              <button className="text-gray-800 hover:text-black transition-colors duration-200">
+              <button className="text-gray-800 hover:text-black transition-all duration-200 transform hover:scale-110">
                 <FiShoppingBag className="h-4 w-4" />
               </button>
 
@@ -520,7 +396,7 @@ const Navbar = () => {
             <div className="lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-800 hover:text-black p-1"
+                className="text-gray-800 hover:text-black p-1 transition-all duration-200 transform hover:scale-110 rounded-md hover:bg-gray-100"
               >
                 {isOpen ? <FiX className="h-5 w-5" /> : <FiMenu className="h-5 w-5" />}
               </button>
@@ -535,7 +411,7 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="block px-3 py-2 text-base font-normal text-gray-800 hover:text-black hover:bg-gray-50 rounded-md transition-colors duration-200"
+                    className="block px-3 py-2 text-base font-normal text-gray-800 hover:text-black hover:bg-gray-50 rounded-md transition-all duration-200 transform hover:scale-105 hover:shadow-sm"
                     onClick={() => setIsOpen(false)}
                     style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                   >
@@ -550,7 +426,7 @@ const Navbar = () => {
                       setIsSearchOpen(true)
                       setIsOpen(false)
                     }}
-                    className="flex items-center space-x-2 w-full px-3 py-2 text-base font-normal text-gray-800 hover:text-black hover:bg-gray-50 rounded-md transition-colors duration-200"
+                    className="flex items-center space-x-2 w-full px-3 py-2 text-base font-normal text-gray-800 hover:text-black hover:bg-gray-50 rounded-md transition-all duration-200 transform hover:scale-105"
                     style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                   >
                     <FiSearch className="h-4 w-4" />
@@ -600,38 +476,59 @@ const Navbar = () => {
       </nav>
 
       {/* Mega Menu Dropdown */}
-      {activeDropdown && (
-        <div className="fixed inset-x-0 top-11 bg-white/95 backdrop-blur-xl border-b border-gray-100 z-40 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {navigation.find(item => item.name === activeDropdown)?.dropdown.sections.map((section, index) => (
-                <div key={index} className="space-y-4">
-                  <h3 
-                    className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                    style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
+      <AnimatePresence>
+        {activeDropdown && (
+          <motion.div 
+            className="fixed inset-x-0 top-11 bg-white/95 backdrop-blur-xl border-b border-gray-100 z-40 shadow-lg mega-dropdown"
+            onMouseEnter={handleMegaDropdownEnter}
+            onMouseLeave={handleDropdownLeave}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {navigation.find(item => item.name === activeDropdown)?.dropdown.sections.map((section, index) => (
+                  <motion.div 
+                    key={index} 
+                    className="space-y-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
-                    {section.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {section.items.map((item, itemIndex) => (
-                      <li key={itemIndex}>
-                        <Link
-                          to={item.href}
-                          className="text-sm text-gray-700 hover:text-black transition-colors duration-200 block"
-                          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-                          onClick={() => setActiveDropdown(null)}
+                    <h3 
+                      className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                      style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
+                    >
+                      {section.title}
+                    </h3>
+                    <ul className="space-y-2">
+                      {section.items.map((item, itemIndex) => (
+                        <motion.li 
+                          key={itemIndex}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: (index * 0.1) + (itemIndex * 0.05) }}
                         >
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                          <Link
+                            to={item.href}
+                            className="text-sm text-gray-700 hover:text-black transition-all duration-200 block hover:bg-gray-50 rounded-md px-2 py-1 -mx-2 transform hover:scale-105"
+                            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item.name}
+                          </Link>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
