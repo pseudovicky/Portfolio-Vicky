@@ -172,6 +172,58 @@ const Navbar = () => {
       }
     },
     { 
+      name: 'Research', 
+      href: '/research', 
+      current: location.pathname === '/research',
+      dropdown: {
+        sections: [
+          {
+            title: 'Research Areas',
+            items: [
+              { name: 'Machine Learning', href: '/research/machine-learning' },
+              { name: 'Data Science', href: '/research/data-science' },
+              { name: 'Web Technologies', href: '/research/web-tech' },
+              { name: 'AI & Innovation', href: '/research/ai-innovation' }
+            ]
+          },
+          {
+            title: 'Publications',
+            items: [
+              { name: 'Research Papers', href: '/research/papers' },
+              { name: 'Case Studies', href: '/research/case-studies' },
+              { name: 'Technical Reports', href: '/research/reports' }
+            ]
+          }
+        ]
+      }
+    },
+    { 
+      name: 'Article', 
+      href: '/article', 
+      current: location.pathname === '/article',
+      dropdown: {
+        sections: [
+          {
+            title: 'Technical Articles',
+            items: [
+              { name: 'Programming Tutorials', href: '/article/tutorials' },
+              { name: 'Tech Insights', href: '/article/insights' },
+              { name: 'Best Practices', href: '/article/best-practices' },
+              { name: 'Code Reviews', href: '/article/code-reviews' }
+            ]
+          },
+          {
+            title: 'Blog Posts',
+            items: [
+              { name: 'Latest Posts', href: '/article/latest' },
+              { name: 'Popular Articles', href: '/article/popular' },
+              { name: 'Tech News', href: '/article/news' }
+            ]
+          }
+        ]
+      }
+    },
+    { 
       name: 'Resume', 
       href: '/resume', 
       current: location.pathname === '/resume',

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
+import TypewriterEffectSmoothDemo from '../components/typewriter-effect-demo-1.jsx'
+import { ThreeDMarqueeDemo } from '../components/ThreeDMarqueeDemo.jsx'
 
 // Typing Text Component
 const TypingText = ({ text, speed = 100, pauseDuration = 2000 }) => {
@@ -309,15 +311,27 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            {/* Typing Effect for Name */}
-            <motion.h1 
-              className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6"
+            {/* Built for Developer Intelligence style tagline - moved to top */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1 }}
+            >
+              <p className="text-base lg:text-lg text-gray-600">
+                Built for <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent font-semibold">Developer Intelligence</span>.
+              </p>
+            </motion.div>
+
+            {/* Typing Effect for Name with more top padding */}
+            <motion.div
+              className="pt-12 mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
             >
-              <TypingText text="I'm Vicky Kumar" speed={150} pauseDuration={3000} />
-            </motion.h1>
+              <TypewriterEffectSmoothDemo />
+            </motion.div>
             
             {/* Subtitle */}
             <motion.p 
@@ -328,24 +342,12 @@ const Home = () => {
             >
               On the way of learning, connecting the dots.
             </motion.p>
-
-            {/* Built for Developer Intelligence style tagline */}
-            <motion.div 
-              className="mt-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 2 }}
-            >
-              <p className="text-base lg:text-lg text-gray-600">
-                Built for <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent font-semibold">Developer Intelligence</span>.
-              </p>
-            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white overflow-hidden">
         <div className="container-max-width section-padding">
           <motion.div 
             className="text-center mb-16"
@@ -362,24 +364,15 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              'React', 'Node.js', 'MongoDB', 'Express',
-              'JavaScript', 'TypeScript', 'Python', 'PostgreSQL',
-              'Tailwind CSS', 'Docker', 'AWS', 'Git'
-            ].map((skill, index) => (
-              <motion.div
-                key={skill}
-                className="card p-6 text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="font-semibold text-secondary-900">{skill}</h3>
-              </motion.div>
-            ))}
-          </div>
+          {/* 3D Marquee Technologies */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <ThreeDMarqueeDemo />
+          </motion.div>
         </div>
       </section>
 
