@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils.js";
 import { motion } from "framer-motion";
 
 export const ThreeDMarquee = ({
-  technologies,
+  images,
   className,
   innerClassName,
   pauseOnHover = true,
@@ -39,33 +39,33 @@ export const ThreeDMarquee = ({
               innerClassName,
             )}
           >
-            {technologies.map((technology, idx) => (
+            {images.map((imageUrl, idx) => (
               <motion.div
                 key={`${i}-${idx}`}
-                className="relative cursor-pointer overflow-hidden rounded-xl border border-slate-200 px-6 py-4 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-slate-800"
+                className="relative cursor-pointer overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-2xl dark:bg-neutral-900 border border-slate-200 dark:border-slate-800"
                 whileHover={{ 
-                  scale: 1.05,
-                  rotateX: 10,
-                  rotateY: 10,
+                  scale: 1.1,
+                  rotateY: 5,
                   z: 50
                 }}
                 style={{
-                  background: technology.gradient,
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px"
                 }}
               >
-                <div className="flex items-center space-x-3">
-                  {technology.icon && (
-                    <div className="text-2xl">
-                      {technology.icon}
-                    </div>
-                  )}
-                  <span className="text-white font-semibold text-lg">
-                    {technology.name}
-                  </span>
+                <div className="flex items-center justify-center h-20 w-20">
+                  <img
+                    src={imageUrl}
+                    alt={`Technology ${idx}`}
+                    className="h-full w-full object-contain transition-transform duration-300 hover:scale-110"
+                  />
                 </div>
                 
-                {/* 3D effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100" />
+                {/* 3D effect overlay with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100 rounded-2xl" />
+                
+                {/* Subtle shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               </motion.div>
             ))}
           </div>

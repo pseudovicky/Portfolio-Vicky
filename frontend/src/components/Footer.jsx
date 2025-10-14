@@ -1,215 +1,189 @@
 import { Link } from 'react-router-dom'
+import { FiGithub, FiLinkedin, FiMail, FiTwitter, FiMapPin } from 'react-icons/fi'
+import { motion } from 'framer-motion'
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
   const footerSections = [
     {
-      title: 'Shop and Learn',
+      title: 'Navigation',
       links: [
-        { name: 'Store', href: '/store' },
-        { name: 'Mac', href: '/mac' },
-        { name: 'iPad', href: '/ipad' },
-        { name: 'iPhone', href: '/iphone' },
-        { name: 'Watch', href: '/watch' },
-        { name: 'AirPods', href: '/airpods' },
-        { name: 'TV & Home', href: '/tv-home' },
-        { name: 'AirTag', href: '/accessories/airtag' },
-        { name: 'Accessories', href: '/accessories' },
-        { name: 'Gift Cards', href: '/store/gift-cards' }
+        { name: 'Home', href: '/' },
+        { name: 'About', href: '/about' },
+        { name: 'Portfolio', href: '/portfolio' },
+        { name: 'Contact', href: '/contact' },
       ]
     },
     {
-      title: 'Apple Wallet',
+      title: 'Personas',
       links: [
-        { name: 'Wallet', href: '/wallet' }
+        { name: 'Data Analyst', href: '/persona/data-analyst' },
+        { name: 'Data Engineer', href: '/persona/data-engineer' },
+        { name: 'ML Engineer', href: '/persona/ml-engineer' },
+        { name: 'Full Stack Developer', href: '/persona/full-stack-developer' },
       ]
     },
     {
-      title: 'Account',
+      title: 'Resources',
       links: [
-        { name: 'Manage Your Apple Account', href: '/account' },
-        { name: 'Apple Store Account', href: '/store/account' },
-        { name: 'iCloud.com', href: 'https://icloud.com' }
+        { name: 'Projects', href: '/portfolio' },
+        { name: 'Blog', href: '#' },
+        { name: 'Resume', href: '#' },
+        { name: 'Documentation', href: '#' },
       ]
     },
-    {
-      title: 'Entertainment',
-      links: [
-        { name: 'Apple One', href: '/entertainment/apple-one' },
-        { name: 'Apple TV+', href: '/entertainment/tv-plus' },
-        { name: 'Apple Music', href: '/entertainment/apple-music' },
-        { name: 'Apple Arcade', href: '/entertainment/apple-arcade' },
-        { name: 'Apple Podcasts', href: '/entertainment/podcasts' },
-        { name: 'Apple Books', href: '/entertainment/books' },
-        { name: 'App Store', href: '/app-store' }
-      ]
+  ]
+
+  const socialLinks = [
+    { 
+      name: 'GitHub', 
+      icon: FiGithub, 
+      href: 'https://github.com/pseudovicky',
+      color: 'hover:text-gray-900 dark:hover:text-gray-100'
     },
-    {
-      title: 'Apple Store',
-      links: [
-        { name: 'Find a Store', href: '/store/locations' },
-        { name: 'Genius Bar', href: '/store/genius-bar' },
-        { name: 'Today at Apple', href: '/store/today-at-apple' },
-        { name: 'Group Reservations', href: '/store/group-reservations' },
-        { name: 'Apple Camp', href: '/store/apple-camp' },
-        { name: 'Apple Trade In', href: '/store/trade-in' },
-        { name: 'Ways to Buy', href: '/store/ways-to-buy' },
-        { name: 'Recycling Programme', href: '/store/recycling' },
-        { name: 'Order Status', href: '/store/order-status' },
-        { name: 'Shopping Help', href: '/store/help' }
-      ]
+    { 
+      name: 'LinkedIn', 
+      icon: FiLinkedin, 
+      href: 'https://linkedin.com/in/vickykumar',
+      color: 'hover:text-blue-600'
     },
-    {
-      title: 'For Business',
-      links: [
-        { name: 'Apple and Business', href: '/business' },
-        { name: 'Shop for Business', href: '/business/shop' }
-      ]
+    { 
+      name: 'Twitter', 
+      icon: FiTwitter, 
+      href: 'https://twitter.com/vickykumar',
+      color: 'hover:text-blue-400'
     },
-    {
-      title: 'For Education',
-      links: [
-        { name: 'Apple and Education', href: '/education' },
-        { name: 'Shop for Education', href: '/education/shop' },
-        { name: 'Shop for University', href: '/education/university' }
-      ]
+    { 
+      name: 'Email', 
+      icon: FiMail, 
+      href: 'mailto:vicky@example.com',
+      color: 'hover:text-red-500'
     },
-    {
-      title: 'For Healthcare',
-      links: [
-        { name: 'Apple in Healthcare', href: '/healthcare' },
-        { name: 'Mac in Healthcare', href: '/healthcare/mac' },
-        { name: 'Health on Apple Watch', href: '/healthcare/watch' }
-      ]
-    },
-    {
-      title: 'Apple Values',
-      links: [
-        { name: 'Accessibility', href: '/accessibility' },
-        { name: 'Education', href: '/values/education' },
-        { name: 'Environment', href: '/environment' },
-        { name: 'Privacy', href: '/privacy' },
-        { name: 'Supply Chain Innovation', href: '/supplier-responsibility' }
-      ]
-    },
-    {
-      title: 'About Apple',
-      links: [
-        { name: 'Newsroom', href: '/newsroom' },
-        { name: 'Apple Leadership', href: '/leadership' },
-        { name: 'Career Opportunities', href: '/careers' },
-        { name: 'Investors', href: '/investor' },
-        { name: 'Ethics & Compliance', href: '/compliance' },
-        { name: 'Events', href: '/events' },
-        { name: 'Contact Apple', href: '/contact' }
-      ]
-    }
   ]
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Disclaimer Text */}
-        <div className="py-4 text-xs text-gray-600 border-b border-gray-200">
-          <p className="mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-            A subscription is required for Apple TV+.
-          </p>
-          <p style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-            Features are subject to change. Some features, applications and services may not be available in all regions or all languages.
-          </p>
-        </div>
-
-        {/* Footer Links Grid */}
-        <div className="py-8">
-          <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-8">
-            {footerSections.map((section, index) => (
-              <div key={index} className="space-y-3">
-                <h3 
-                  className="text-xs font-semibold text-gray-900 uppercase tracking-wider"
-                  style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-                >
-                  {section.title}
-                </h3>
-                <ul className="space-y-2">
-                  {section.links.map((link, linkIndex) => (
-                    <li key={linkIndex}>
-                      {link.href.startsWith('http') ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-gray-600 hover:text-gray-900 transition-colors duration-200"
-                          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-                        >
-                          {link.name}
-                        </a>
-                      ) : (
-                        <Link
-                          to={link.href}
-                          className="text-xs text-gray-600 hover:text-gray-900 transition-colors duration-200"
-                          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-                        >
-                          {link.name}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Store Locator */}
-        <div className="py-4 border-t border-gray-200">
-          <p className="text-xs text-gray-600 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-            More ways to shop:{' '}
-            <Link to="/store/locations" className="text-blue-600 hover:underline">
-              Find an Apple Store
-            </Link>
-            {' '}or{' '}
-            <a href="#" className="text-blue-600 hover:underline">
-              other retailer
-            </a>
-            {' '}near you. Or call{' '}
-            <a href="tel:0008004019600" className="text-blue-600 hover:underline">
-              000800 040 1966
-            </a>
-            .
-          </p>
-        </div>
-
-        {/* Copyright and Legal Links */}
-        <div className="py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <p className="text-xs text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-              Copyright © {new Date().getFullYear()} Apple Inc. All rights reserved.
+    <footer className="bg-gradient-to-b from-gray-50 to-white border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          {/* Brand Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="col-span-1"
+          >
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-3 tracking-tight">
+              Vicky Kumar
+            </h3>
+            <p className="text-gray-600 text-sm mb-4 leading-relaxed tracking-tight">
+              Full Stack Developer & Data Analyst passionate about building innovative solutions and turning data into insights.
             </p>
-            <div className="flex flex-wrap items-center space-x-1 sm:space-x-4 text-xs text-gray-600">
-              <Link to="/legal/privacy" className="hover:text-gray-900 transition-colors duration-200">
-                Privacy Policy
+            <div className="flex items-center text-sm text-gray-500 mb-2">
+              <FiMapPin className="mr-2" />
+              <span className="tracking-tight">India</span>
+            </div>
+          </motion.div>
+
+          {/* Footer Links */}
+          {footerSections.map((section, index) => (
+            <motion.div
+              key={section.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
+                {section.title}
+              </h4>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      to={link.href}
+                      className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200 tracking-tight"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-200 my-8"></div>
+
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex space-x-6"
+          >
+            {socialLinks.map((social) => {
+              const Icon = social.icon
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-gray-500 ${social.color} transition-colors duration-200`}
+                  aria-label={social.name}
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              )
+            })}
+          </motion.div>
+
+          {/* Copyright & Links */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-500"
+          >
+            <p className="tracking-tight">
+              © {currentYear} Vicky Kumar. All rights reserved.
+            </p>
+            <div className="flex items-center space-x-4">
+              <Link to="/legal/privacy" className="hover:text-gray-900 transition-colors duration-200 tracking-tight">
+                Privacy
               </Link>
-              <span className="text-gray-400">|</span>
-              <Link to="/legal/terms" className="hover:text-gray-900 transition-colors duration-200">
-                Terms of Use
+              <span className="text-gray-300">|</span>
+              <Link to="/legal/terms" className="hover:text-gray-900 transition-colors duration-200 tracking-tight">
+                Terms
               </Link>
-              <span className="text-gray-400">|</span>
-              <Link to="/legal/sales-policy" className="hover:text-gray-900 transition-colors duration-200">
-                Sales Policy
-              </Link>
-              <span className="text-gray-400">|</span>
-              <Link to="/legal" className="hover:text-gray-900 transition-colors duration-200">
-                Legal
-              </Link>
-              <span className="text-gray-400">|</span>
-              <Link to="/sitemap" className="hover:text-gray-900 transition-colors duration-200">
-                Site Map
+              <span className="text-gray-300">|</span>
+              <Link to="/sitemap" className="hover:text-gray-900 transition-colors duration-200 tracking-tight">
+                Sitemap
               </Link>
             </div>
-          </div>
-          <div className="text-xs text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-            India
-          </div>
+          </motion.div>
         </div>
+
+        {/* Optional: Tech Stack Badge */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-xs text-gray-400 tracking-tight">
+            Built with React, Node.js, MongoDB & ❤️
+          </p>
+        </motion.div>
       </div>
     </footer>
   )

@@ -14,6 +14,7 @@ import GoogleCallback from './pages/GoogleCallback'
 import ProtectedRoute from './components/ProtectedRoute'
 import Project from './pages/Project'
 import Welcome from './pages/Welcome'
+import Journey from './pages/Journey'
 
 // Persona Pages
 import Persona from './pages/Persona'
@@ -38,6 +39,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/journey" element={<Journey />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/auth/google/callback" element={<GoogleCallback />} />
