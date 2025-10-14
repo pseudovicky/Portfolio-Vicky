@@ -12,7 +12,20 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import GoogleCallback from './pages/GoogleCallback'
 import ProtectedRoute from './components/ProtectedRoute'
-import Project from './pages/Project';
+import Project from './pages/Project'
+import Welcome from './pages/Welcome'
+
+// Persona Pages
+import Persona from './pages/Persona'
+import DataAnalyst from './pages/persona/DataAnalyst'
+import DataEngineer from './pages/persona/DataEngineer'
+import MLEngineer from './pages/persona/MLEngineer'
+import AIEngineer from './pages/persona/AIEngineer'
+import UIUXDesigner from './pages/persona/UIUXDesigner'
+import FrontEndDeveloper from './pages/persona/FrontEndDeveloper'
+import FullStackDeveloper from './pages/persona/FullStackDeveloper'
+import ResearchAnalyst from './pages/persona/ResearchAnalyst'
+import Others from './pages/persona/Others'
 
 function App() {
   return (
@@ -37,6 +50,19 @@ function App() {
             } 
           />
           <Route path="/project" element={<Project />} />
+          <Route path="/welcome" element={<Welcome />} />
+          
+          {/* Persona Routes */}
+          <Route path="/persona" element={<Persona />} />
+          <Route path="/persona/data-analyst" element={<DataAnalyst />} />
+          <Route path="/persona/data-engineer" element={<DataEngineer />} />
+          <Route path="/persona/ml-engineer" element={<MLEngineer />} />
+          <Route path="/persona/ai-engineer" element={<AIEngineer />} />
+          <Route path="/persona/ui-ux-designer" element={<UIUXDesigner />} />
+          <Route path="/persona/front-end-developer" element={<FrontEndDeveloper />} />
+          <Route path="/persona/full-stack-developer" element={<FullStackDeveloper />} />
+          <Route path="/persona/research-analyst" element={<ResearchAnalyst />} />
+          <Route path="/persona/others" element={<Others />} />
         </Routes>
       </main>
       <Footer />

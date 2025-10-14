@@ -24,6 +24,7 @@ const Navbar = () => {
           {
             title: 'Welcome',
             items: [
+              { name: 'Welcome', href: '/welcome' },
               { name: 'About Me', href: '/about' },
               { name: 'My Story', href: '/story' },
               { name: 'Skills Overview', href: '/skills' },
@@ -270,6 +271,34 @@ const Navbar = () => {
               { name: 'LinkedIn', href: '/connect/linkedin' },
               { name: 'GitHub', href: '/connect/github' },
               { name: 'Twitter', href: '/connect/twitter' }
+            ]
+          }
+        ]
+      }
+    },
+    { 
+      name: 'Persona', 
+      href: '/persona', 
+      current: location.pathname === '/persona',
+      dropdown: {
+        sections: [
+          {
+            title: 'Technical Roles',
+            items: [
+              { name: 'Data Analyst', href: '/persona/data-analyst' },
+              { name: 'Data Engineer', href: '/persona/data-engineer' },
+              { name: 'ML Engineer', href: '/persona/ml-engineer' },
+              { name: 'AI Engineer', href: '/persona/ai-engineer' },
+              { name: 'Full Stack Developer', href: '/persona/full-stack-developer' }
+            ]
+          },
+          {
+            title: 'Creative & Research',
+            items: [
+              { name: 'UI/UX Designer', href: '/persona/ui-ux-designer' },
+              { name: 'Front End Developer', href: '/persona/front-end-developer' },
+              { name: 'Research Analyst', href: '/persona/research-analyst' },
+              { name: 'Others', href: '/persona/others' }
             ]
           }
         ]
