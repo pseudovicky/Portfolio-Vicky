@@ -13,106 +13,56 @@ const SearchModal = ({ isOpen, onClose }) => {
   // Comprehensive search data including all navigation items and their sub-items
   const searchData = [
     // Main navigation
-    { title: 'Home', href: '/', category: 'Pages', description: 'Main homepage' },
-    { title: 'About', href: '/about', category: 'Pages', description: 'About us page' },
-    { title: 'Portfolio', href: '/portfolio', category: 'Pages', description: 'Portfolio showcase' },
-    { title: 'Contact', href: '/contact', category: 'Pages', description: 'Contact information' },
-    { title: 'Dashboard', href: '/dashboard', category: 'Pages', description: 'User dashboard' },
-    { title: 'Login', href: '/login', category: 'Auth', description: 'Sign in to your account' },
-    { title: 'Register', href: '/register', category: 'Auth', description: 'Create new account' },
-    { title: 'Sign In', href: '/login', category: 'Auth', description: 'Sign in to your account' },
+    { title: 'Home', href: '/', category: 'Pages', description: 'Main homepage and portfolio intro', keywords: 'home main index landing' },
+    { title: 'About', href: '/about', category: 'Pages', description: 'About me, background, and experience', keywords: 'about biography bio info information background' },
+    { title: 'Portfolio', href: '/portfolio', category: 'Pages', description: 'Project portfolio and work showcase', keywords: 'portfolio projects work showcase gallery' },
+    { title: 'Contact', href: '/contact', category: 'Pages', description: 'Contact information and form', keywords: 'contact email reach connect message' },
+    { title: 'Journey', href: '/journey', category: 'Pages', description: 'My professional journey and timeline', keywords: 'journey timeline career path story experience' },
+    { title: 'Projects', href: '/project', category: 'Pages', description: 'Detailed project information', keywords: 'projects work portfolio case studies' },
+    { title: 'Welcome', href: '/welcome', category: 'Pages', description: 'Welcome page', keywords: 'welcome intro introduction start' },
     
-    // Store section
-    { title: 'Store', href: '/store', category: 'Store', description: 'Main store page' },
-    { title: 'Shop the Latest', href: '/store/latest', category: 'Store', description: 'Latest products' },
-    { title: 'Mac Store', href: '/store/mac', category: 'Store', description: 'Mac products' },
-    { title: 'iPad Store', href: '/store/ipad', category: 'Store', description: 'iPad products' },
-    { title: 'iPhone Store', href: '/store/iphone', category: 'Store', description: 'iPhone products' },
-    { title: 'Apple Watch Store', href: '/store/watch', category: 'Store', description: 'Apple Watch products' },
-    { title: 'Accessories Store', href: '/store/accessories', category: 'Store', description: 'Accessories' },
-    { title: 'Find a Store', href: '/store/locations', category: 'Store', description: 'Store locations' },
-    { title: 'Order Status', href: '/store/order-status', category: 'Store', description: 'Check order status' },
-    { title: 'Education Store', href: '/store/education', category: 'Store', description: 'Education pricing' },
-    { title: 'Business Store', href: '/store/business', category: 'Store', description: 'Business solutions' },
+    // Auth section
+    { title: 'Login', href: '/login', category: 'Auth', description: 'Sign in to your account', keywords: 'login signin sign in authenticate' },
+    { title: 'Sign In', href: '/login', category: 'Auth', description: 'Sign in to your account', keywords: 'signin login sign in authenticate' },
+    { title: 'Register', href: '/register', category: 'Auth', description: 'Create new account', keywords: 'register signup sign up create account' },
+    { title: 'Sign Up', href: '/register', category: 'Auth', description: 'Create new account', keywords: 'signup register sign up create account' },
+    { title: 'Dashboard', href: '/dashboard', category: 'Auth', description: 'User dashboard (requires login)', keywords: 'dashboard profile account user panel' },
 
-    // Mac section
-    { title: 'Mac', href: '/mac', category: 'Mac', description: 'All Mac products' },
-    { title: 'MacBook Air', href: '/mac/macbook-air', category: 'Mac', description: 'MacBook Air laptops' },
-    { title: 'MacBook Pro', href: '/mac/macbook-pro', category: 'Mac', description: 'MacBook Pro laptops' },
-    { title: 'iMac', href: '/mac/imac', category: 'Mac', description: 'iMac desktops' },
-    { title: 'Mac mini', href: '/mac/mac-mini', category: 'Mac', description: 'Mac mini computers' },
-    { title: 'Mac Studio', href: '/mac/mac-studio', category: 'Mac', description: 'Mac Studio workstations' },
-    { title: 'Mac Pro', href: '/mac/mac-pro', category: 'Mac', description: 'Mac Pro workstations' },
-    { title: 'macOS', href: '/mac/macos', category: 'Mac', description: 'Mac operating system' },
-    { title: 'macOS Sequoia', href: '/mac/macos', category: 'Mac', description: 'Latest macOS version' },
-
-    // iPad section
-    { title: 'iPad', href: '/ipad', category: 'iPad', description: 'All iPad products' },
-    { title: 'iPad Pro', href: '/ipad/ipad-pro', category: 'iPad', description: 'iPad Pro tablets' },
-    { title: 'iPad Air', href: '/ipad/ipad-air', category: 'iPad', description: 'iPad Air tablets' },
-    { title: 'iPad mini', href: '/ipad/ipad-mini', category: 'iPad', description: 'iPad mini tablets' },
-    { title: 'Apple Pencil', href: '/ipad/apple-pencil', category: 'iPad', description: 'Apple Pencil stylus' },
-    { title: 'iPad Keyboards', href: '/ipad/keyboards', category: 'iPad', description: 'iPad keyboards' },
-    { title: 'iPadOS', href: '/ipad/ipados', category: 'iPad', description: 'iPad operating system' },
-
-    // iPhone section
-    { title: 'iPhone', href: '/iphone', category: 'iPhone', description: 'All iPhone products' },
-    { title: 'iPhone 16 Pro', href: '/iphone/iphone-16-pro', category: 'iPhone', description: 'iPhone 16 Pro' },
-    { title: 'iPhone 16', href: '/iphone/iphone-16', category: 'iPhone', description: 'iPhone 16' },
-    { title: 'iPhone 15', href: '/iphone/iphone-15', category: 'iPhone', description: 'iPhone 15' },
-    { title: 'iPhone 14', href: '/iphone/iphone-14', category: 'iPhone', description: 'iPhone 14' },
-    { title: 'iPhone SE', href: '/iphone/iphone-se', category: 'iPhone', description: 'iPhone SE' },
-    { title: 'iOS', href: '/iphone/ios', category: 'iPhone', description: 'iPhone operating system' },
-    { title: 'iOS 18', href: '/iphone/ios', category: 'iPhone', description: 'Latest iOS version' },
-
-    // Apple Watch section
-    { title: 'Apple Watch', href: '/watch', category: 'Watch', description: 'All Apple Watch products' },
-    { title: 'Apple Watch Series 10', href: '/watch/series-10', category: 'Watch', description: 'Latest Apple Watch' },
-    { title: 'Apple Watch Ultra', href: '/watch/ultra', category: 'Watch', description: 'Apple Watch Ultra' },
-    { title: 'Apple Watch SE', href: '/watch/se', category: 'Watch', description: 'Apple Watch SE' },
-    { title: 'Apple Watch Nike', href: '/watch/nike', category: 'Watch', description: 'Nike Apple Watch' },
-    { title: 'Apple Watch Bands', href: '/watch/bands', category: 'Watch', description: 'Watch bands' },
-    { title: 'watchOS', href: '/watch/watchos', category: 'Watch', description: 'Apple Watch OS' },
-
-    // AirPods section
-    { title: 'AirPods', href: '/airpods', category: 'AirPods', description: 'All AirPods products' },
-    { title: 'AirPods Pro', href: '/airpods/airpods-pro', category: 'AirPods', description: 'AirPods Pro' },
-    { title: 'AirPods Max', href: '/airpods/airpods-max', category: 'AirPods', description: 'AirPods Max' },
-    { title: 'AirPods 4', href: '/airpods/airpods-4', category: 'AirPods', description: 'AirPods 4' },
-    { title: 'AirPods 3', href: '/airpods/airpods-3', category: 'AirPods', description: 'AirPods 3' },
-
-    // TV & Home section
-    { title: 'Apple TV', href: '/tv-home/apple-tv-4k', category: 'TV & Home', description: 'Apple TV 4K' },
-    { title: 'Apple TV 4K', href: '/tv-home/apple-tv-4k', category: 'TV & Home', description: 'Apple TV streaming device' },
-    { title: 'HomePod', href: '/tv-home/homepod', category: 'TV & Home', description: 'HomePod smart speaker' },
-    { title: 'HomePod mini', href: '/tv-home/homepod-mini', category: 'TV & Home', description: 'Compact smart speaker' },
-    { title: 'Apple TV+', href: '/tv-home/tv-plus', category: 'TV & Home', description: 'Streaming service' },
-
-    // Entertainment section
-    { title: 'Apple One', href: '/entertainment/apple-one', category: 'Entertainment', description: 'Bundle subscription' },
-    { title: 'Apple Music', href: '/entertainment/apple-music', category: 'Entertainment', description: 'Music streaming' },
-    { title: 'Apple Arcade', href: '/entertainment/apple-arcade', category: 'Entertainment', description: 'Gaming service' },
-    { title: 'Apple Fitness+', href: '/entertainment/fitness-plus', category: 'Entertainment', description: 'Fitness service' },
-    { title: 'Apple News+', href: '/entertainment/news-plus', category: 'Entertainment', description: 'News service' },
-    { title: 'Apple Podcasts', href: '/entertainment/podcasts', category: 'Entertainment', description: 'Podcast platform' },
-    { title: 'Apple Books', href: '/entertainment/books', category: 'Entertainment', description: 'E-book platform' },
-
-    // Support section
-    { title: 'Support', href: '/support', category: 'Support', description: 'Get help and support' },
-    { title: 'iPhone Support', href: '/support/iphone', category: 'Support', description: 'iPhone help' },
-    { title: 'Mac Support', href: '/support/mac', category: 'Support', description: 'Mac help' },
-    { title: 'iPad Support', href: '/support/ipad', category: 'Support', description: 'iPad help' },
-    { title: 'Apple Watch Support', href: '/support/watch', category: 'Support', description: 'Apple Watch help' },
-    { title: 'Community', href: '/support/community', category: 'Support', description: 'Community forums' },
-    { title: 'Contact Support', href: '/support/contact', category: 'Support', description: 'Contact us' },
-
-    // Accessories
-    { title: 'Accessories', href: '/accessories', category: 'Accessories', description: 'All accessories' },
-    { title: 'Mac Accessories', href: '/accessories/mac', category: 'Accessories', description: 'Mac accessories' },
-    { title: 'iPad Accessories', href: '/accessories/ipad', category: 'Accessories', description: 'iPad accessories' },
-    { title: 'iPhone Accessories', href: '/accessories/iphone', category: 'Accessories', description: 'iPhone accessories' },
-    { title: 'Beats', href: '/accessories/beats', category: 'Accessories', description: 'Beats headphones' },
-    { title: 'AirTag', href: '/accessories/airtag', category: 'Accessories', description: 'Item tracker' }
+    // Persona section - Main
+    { title: 'Personas', href: '/persona', category: 'Personas', description: 'Explore different professional personas', keywords: 'persona roles careers explore' },
+    { title: 'Career Paths', href: '/persona', category: 'Personas', description: 'Different career paths and roles', keywords: 'career paths roles personas explore' },
+    
+    // Data & Analytics Personas
+    { title: 'Data Analyst', href: '/persona/data-analyst', category: 'Personas', description: 'Data analysis and visualization specialist', keywords: 'data analyst analytics analysis visualization insights statistics' },
+    { title: 'Data Engineer', href: '/persona/data-engineer', category: 'Personas', description: 'Data pipeline and infrastructure expert', keywords: 'data engineer etl pipeline infrastructure database bigdata' },
+    { title: 'Research Analyst', href: '/persona/research-analyst', category: 'Personas', description: 'Research and analytical specialist', keywords: 'research analyst researcher analysis study investigation' },
+    
+    // AI & Machine Learning Personas
+    { title: 'ML Engineer', href: '/persona/ml-engineer', category: 'Personas', description: 'Machine learning engineer and model developer', keywords: 'ml machine learning engineer ai model training deployment' },
+    { title: 'Machine Learning Engineer', href: '/persona/ml-engineer', category: 'Personas', description: 'Machine learning engineer', keywords: 'machine learning ml engineer ai model' },
+    { title: 'AI Engineer', href: '/persona/ai-engineer', category: 'Personas', description: 'Artificial intelligence engineer', keywords: 'ai artificial intelligence engineer deep learning nlp computer vision' },
+    { title: 'Artificial Intelligence', href: '/persona/ai-engineer', category: 'Personas', description: 'AI and deep learning specialist', keywords: 'artificial intelligence ai deep learning neural networks' },
+    
+    // Development Personas
+    { title: 'Full Stack Developer', href: '/persona/full-stack-developer', category: 'Personas', description: 'Full stack web development expert', keywords: 'fullstack full stack developer web backend frontend react node' },
+    { title: 'Front End Developer', href: '/persona/front-end-developer', category: 'Personas', description: 'Frontend development specialist', keywords: 'frontend front end developer ui web react javascript css' },
+    { title: 'Frontend Developer', href: '/persona/front-end-developer', category: 'Personas', description: 'Frontend and UI development', keywords: 'frontend developer ui ux web react vue angular' },
+    
+    // Design Personas
+    { title: 'UI/UX Designer', href: '/persona/ui-ux-designer', category: 'Personas', description: 'User interface and experience designer', keywords: 'ui ux designer design interface experience figma sketch' },
+    { title: 'UX Designer', href: '/persona/ui-ux-designer', category: 'Personas', description: 'User experience designer', keywords: 'ux user experience designer ui design' },
+    { title: 'UI Designer', href: '/persona/ui-ux-designer', category: 'Personas', description: 'User interface designer', keywords: 'ui user interface designer ux design' },
+    
+    // Other Personas
+    { title: 'Explorer', href: '/persona/explorer', category: 'Personas', description: 'Exploring different tech domains', keywords: 'explorer explore learning curious generalist' },
+    { title: 'Others', href: '/persona/others', category: 'Personas', description: 'Other professional roles', keywords: 'others miscellaneous different various roles' },
+    
+    // Additional searchable terms for common queries
+    { title: 'Skills', href: '/about', category: 'Info', description: 'Technical skills and expertise', keywords: 'skills expertise technologies stack tools' },
+    { title: 'Experience', href: '/about', category: 'Info', description: 'Work experience and background', keywords: 'experience work history background career' },
+    { title: 'Technologies', href: '/portfolio', category: 'Info', description: 'Technologies and tools used', keywords: 'technologies tools tech stack frameworks libraries' },
+    { title: 'Resume', href: '/about', category: 'Info', description: 'Resume and CV information', keywords: 'resume cv curriculum vitae experience education' },
+    { title: 'Projects Gallery', href: '/portfolio', category: 'Info', description: 'Browse project gallery', keywords: 'projects gallery showcase portfolio work' },
   ]
 
   // Filter results based on query
@@ -123,22 +73,48 @@ const SearchModal = ({ isOpen, onClose }) => {
       return
     }
 
+    const queryLower = query.toLowerCase()
+    const searchTerms = queryLower.split(' ').filter(term => term.length > 0)
+
     const filtered = searchData.filter(item => {
-      const searchTerms = query.toLowerCase().split(' ')
+      // Search in title, description, category, and keywords
       const titleMatch = searchTerms.every(term => 
-        item.title.toLowerCase().includes(term) ||
-        item.description.toLowerCase().includes(term) ||
+        item.title.toLowerCase().includes(term)
+      )
+      const descriptionMatch = searchTerms.every(term => 
+        item.description.toLowerCase().includes(term)
+      )
+      const categoryMatch = searchTerms.every(term => 
         item.category.toLowerCase().includes(term)
       )
-      return titleMatch
+      const keywordsMatch = item.keywords && searchTerms.some(term => 
+        item.keywords.toLowerCase().includes(term)
+      )
+      
+      return titleMatch || descriptionMatch || categoryMatch || keywordsMatch
     })
 
-    // Sort by relevance (exact matches first, then partial matches)
+    // Sort by relevance
     filtered.sort((a, b) => {
-      const aExact = a.title.toLowerCase().includes(query.toLowerCase())
-      const bExact = b.title.toLowerCase().includes(query.toLowerCase())
-      if (aExact && !bExact) return -1
-      if (!aExact && bExact) return 1
+      // Exact title match gets highest priority
+      const aExactTitle = a.title.toLowerCase() === queryLower
+      const bExactTitle = b.title.toLowerCase() === queryLower
+      if (aExactTitle && !bExactTitle) return -1
+      if (!aExactTitle && bExactTitle) return 1
+      
+      // Title starts with query gets second priority
+      const aStartsWith = a.title.toLowerCase().startsWith(queryLower)
+      const bStartsWith = b.title.toLowerCase().startsWith(queryLower)
+      if (aStartsWith && !bStartsWith) return -1
+      if (!aStartsWith && bStartsWith) return 1
+      
+      // Title contains query gets third priority
+      const aTitleContains = a.title.toLowerCase().includes(queryLower)
+      const bTitleContains = b.title.toLowerCase().includes(queryLower)
+      if (aTitleContains && !bTitleContains) return -1
+      if (!aTitleContains && bTitleContains) return 1
+      
+      // Shorter titles preferred for same relevance
       return a.title.length - b.title.length
     })
 
