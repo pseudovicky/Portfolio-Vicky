@@ -53,6 +53,12 @@ const Persona = () => {
       icon: '🔬'
     },
     {
+      title: 'Explorer',
+      description: 'On the journey of searching, connecting dots, and learning',
+      path: '/persona/explorer',
+      icon: '🗺️'
+    },
+    {
       title: 'Others',
       description: 'Exploring other professional roles and capabilities',
       path: '/persona/others',

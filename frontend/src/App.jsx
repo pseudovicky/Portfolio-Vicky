@@ -26,6 +26,7 @@ import UIUXDesigner from './pages/persona/UIUXDesigner'
 import FrontEndDeveloper from './pages/persona/FrontEndDeveloper'
 import FullStackDeveloper from './pages/persona/FullStackDeveloper'
 import ResearchAnalyst from './pages/persona/ResearchAnalyst'
+import Explorer from './pages/persona/Explorer'
 import Others from './pages/persona/Others'
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/persona/front-end-developer" element={<FrontEndDeveloper />} />
           <Route path="/persona/full-stack-developer" element={<FullStackDeveloper />} />
           <Route path="/persona/research-analyst" element={<ResearchAnalyst />} />
+          <Route path="/persona/explorer" element={<Explorer />} />
           <Route path="/persona/others" element={<Others />} />
         </Routes>
       </main>
