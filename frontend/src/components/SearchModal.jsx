@@ -57,11 +57,27 @@ const SearchModal = ({ isOpen, onClose }) => {
     { title: 'Explorer', href: '/persona/explorer', category: 'Personas', description: 'Exploring different tech domains', keywords: 'explorer explore learning curious generalist' },
     { title: 'Others', href: '/persona/others', category: 'Personas', description: 'Other professional roles', keywords: 'others miscellaneous different various roles' },
     
+    // Resume section - Main
+    { title: 'Resume', href: '/resume', category: 'Resume', description: 'View all specialized resumes', keywords: 'resume cv curriculum vitae experience education' },
+    { title: 'General Resume', href: '/resume/general', category: 'Resume', description: 'Comprehensive general resume', keywords: 'general resume cv all skills comprehensive' },
+    { title: 'Data Engineer Resume', href: '/resume/data-engineer', category: 'Resume', description: 'Data engineering specialized resume', keywords: 'data engineer etl pipeline resume cv' },
+    { title: 'Data Analyst Resume', href: '/resume/data-analyst', category: 'Resume', description: 'Data analyst specialized resume', keywords: 'data analyst visualization resume cv analytics' },
+    { title: 'ML Engineer Resume', href: '/resume/ml-engineer', category: 'Resume', description: 'Machine learning engineer resume', keywords: 'ml machine learning engineer resume cv ai' },
+    { title: 'AI Engineer Resume', href: '/resume/ai-engineer', category: 'Resume', description: 'AI engineer specialized resume', keywords: 'ai artificial intelligence engineer resume cv deep learning' },
+    { title: 'Full Stack MERN Resume', href: '/resume/full-stack-mern', category: 'Resume', description: 'MERN stack developer resume', keywords: 'fullstack mern mongodb express react node resume cv' },
+    { title: 'Django Developer Resume', href: '/resume/django-developer', category: 'Resume', description: 'Django developer specialized resume', keywords: 'django python developer resume cv backend' },
+    { title: 'Python Developer Resume', href: '/resume/python-developer', category: 'Resume', description: 'Python developer resume', keywords: 'python developer programming resume cv scripting' },
+    { title: 'Frontend Developer Resume', href: '/resume/frontend-developer', category: 'Resume', description: 'Frontend developer resume', keywords: 'frontend developer react vue angular resume cv ui' },
+    { title: 'Backend Developer Resume', href: '/resume/backend-developer', category: 'Resume', description: 'Backend developer resume', keywords: 'backend developer server api database resume cv' },
+    { title: 'API Developer Resume', href: '/resume/api-developer', category: 'Resume', description: 'API developer specialized resume', keywords: 'api rest graphql microservices resume cv developer' },
+    { title: 'UI/UX Developer Resume', href: '/resume/ui-ux-developer', category: 'Resume', description: 'UI/UX developer resume', keywords: 'ui ux designer developer resume cv design interface' },
+    { title: 'Research Analyst Resume', href: '/resume/research-analyst', category: 'Resume', description: 'Research analyst resume', keywords: 'research analyst investigation resume cv study' },
+    { title: 'Content Writer Resume', href: '/resume/content-writer', category: 'Resume', description: 'Content writer resume', keywords: 'content writer documentation technical writing resume cv' },
+    
     // Additional searchable terms for common queries
     { title: 'Skills', href: '/about', category: 'Info', description: 'Technical skills and expertise', keywords: 'skills expertise technologies stack tools' },
     { title: 'Experience', href: '/about', category: 'Info', description: 'Work experience and background', keywords: 'experience work history background career' },
     { title: 'Technologies', href: '/portfolio', category: 'Info', description: 'Technologies and tools used', keywords: 'technologies tools tech stack frameworks libraries' },
-    { title: 'Resume', href: '/about', category: 'Info', description: 'Resume and CV information', keywords: 'resume cv curriculum vitae experience education' },
     { title: 'Projects Gallery', href: '/portfolio', category: 'Info', description: 'Browse project gallery', keywords: 'projects gallery showcase portfolio work' },
   ]
 

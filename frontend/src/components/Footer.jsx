@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { FiGithub, FiLinkedin, FiMail, FiTwitter, FiYoutube, FiInstagram, FiFacebook } from 'react-icons/fi'
-import { FaTiktok } from 'react-icons/fa'
+import { FiGithub, FiLinkedin, FiMail, FiTwitter, FiYoutube, FiInstagram, FiFacebook, FiMessageCircle, FiSend } from 'react-icons/fi'
+import { FaTiktok, FaDiscord, FaTelegramPlane, FaPinterest, FaSnapchat, FaReddit, FaDribbble, FaMedium, FaSkype } from 'react-icons/fa'
 
 const Footer = () => {
   const footerSections = [
@@ -65,11 +65,21 @@ const Footer = () => {
   ]
 
   const socialLinks = [
+    { name: 'LinkedIn', icon: FiLinkedin, href: 'https://www.linkedin.com/in/pseudovicky/' },
+    { name: 'Twitter', icon: FiTwitter, href: 'https://x.com/gitviki' },
+    { name: 'Facebook', icon: FiFacebook, href: 'https://www.facebook.com/gitviki/' },
+    { name: 'Instagram', icon: FiInstagram, href: 'https://www.instagram.com/viking08_/' },
+    { name: 'GitHub', icon: FiGithub, href: 'https://github.com/pseudovicky' },
+    { name: 'Gmail', icon: FiMail, href: 'mailto:sudovicky@gmail.com' },
     { name: 'YouTube', icon: FiYoutube, href: 'https://youtube.com' },
-    { name: 'Twitter', icon: FiTwitter, href: 'https://twitter.com/vickykumar' },
-    { name: 'Instagram', icon: FiInstagram, href: 'https://instagram.com' },
-    { name: 'Facebook', icon: FiFacebook, href: 'https://facebook.com' },
-    { name: 'TikTok', icon: FaTiktok, href: 'https://tiktok.com' },
+    { name: 'Reddit', icon: FaReddit, href: 'https://www.reddit.com/user/git-viki/' },
+    { name: 'Dribbble', icon: FaDribbble, href: '#' },
+    { name: 'Medium', icon: FaMedium, href: '#' },
+    { name: 'Skype', icon: FaSkype, href: '#' },
+    { name: 'Discord', icon: FaDiscord, href: '#' },
+    { name: 'Telegram', icon: FaTelegramPlane, href: '#' },
+    { name: 'Pinterest', icon: FaPinterest, href: '#' },
+    { name: 'Snapchat', icon: FaSnapchat, href: '#' },
   ]
 
   return (
@@ -99,7 +109,7 @@ const Footer = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex gap-4 mb-8">
+        <div className="flex flex-wrap gap-4 mb-8">
           {socialLinks.map((social) => {
             const Icon = social.icon
             return (
@@ -110,8 +120,9 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
                 aria-label={social.name}
+                title={social.name}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-6 h-6" />
               </a>
             )
           })}

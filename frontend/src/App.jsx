@@ -15,6 +15,10 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Project from './pages/Project'
 import Welcome from './pages/Welcome'
 import Journey from './pages/Journey'
+import Resume from './pages/Resume'
+
+// Resume CV Pages
+import DataAnalystCV from './pages/resume/DataAnalystCV'
 
 // Persona Pages
 import Persona from './pages/Persona'
@@ -41,6 +45,8 @@ function App() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/journey" element={<Journey />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/resume/data-analyst/CV" element={<DataAnalystCV />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/auth/google/callback" element={<GoogleCallback />} />
