@@ -16,6 +16,8 @@ import Project from './pages/Project'
 import Welcome from './pages/Welcome'
 import Journey from './pages/Journey'
 import Resume from './pages/Resume'
+import Work from './pages/Work'
+import Connect from './pages/Connect'
 
 // Resume CV Pages
 import DataAnalystCV from './pages/resume/DataAnalystCV'
@@ -47,6 +49,8 @@ function App() {
           <Route path="/journey" element={<Journey />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/resume/data-analyst/CV" element={<DataAnalystCV />} />
+          <Route path="/work" element={<Work />} />
+          <Route path="/connect" element={<Connect />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/auth/google/callback" element={<GoogleCallback />} />
