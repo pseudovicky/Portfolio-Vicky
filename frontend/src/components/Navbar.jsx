@@ -319,6 +319,7 @@ const Navbar = () => {
               { name: 'UI/UX Designer', href: '/persona/ui-ux-designer' },
               { name: 'Front End Developer', href: '/persona/front-end-developer' },
               { name: 'Research Analyst', href: '/persona/research-analyst' },
+              { name: 'Explorer', href: '/persona/explorer' },
               { name: 'Others', href: '/persona/others' }
             ]
           }
