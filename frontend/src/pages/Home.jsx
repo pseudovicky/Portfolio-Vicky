@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import TypewriterEffectSmoothDemo from '../components/typewriter-effect-demo-1.jsx'
 import { ThreeDMarqueeDemo } from '../components/ThreeDMarqueeDemo.jsx'
+import ScrollingTextReveal from '../components/ScrollingTextReveal.jsx'
+import IntroCard from '../components/IntroCard.jsx'
+import SkillsSection from '../components/SkillsSection.jsx'
 
 // Typing Text Component
 const TypingText = ({ text, speed = 100, pauseDuration = 2000 }) => {
@@ -324,98 +327,14 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Scrolling Text Reveal Section */}
+      <ScrollingTextReveal />
+
+      {/* Intro Card Section */}
+      <IntroCard />
+
       {/* Skills Section */}
-      <section className="py-20 bg-white overflow-hidden">
-        <div className="container-max-width section-padding">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
-              Skills & Technologies
-            </h2>
-            <p className="text-lg text-secondary-600 max-w-2xl mx-auto">
-              I work with modern technologies to build scalable and efficient applications
-            </p>
-          </motion.div>
-
-          {/* 3D Marquee Technologies */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <ThreeDMarqueeDemo />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section className="py-20 bg-secondary-50">
-        <div className="container-max-width section-padding">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-lg text-secondary-600 max-w-2xl mx-auto">
-              Here are some of my recent projects that I'm proud to showcase
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Example project cards - these would be dynamic from API */}
-            {[1, 2, 3].map((project) => (
-              <motion.div
-                key={project}
-                className="card p-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: project * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="h-48 bg-secondary-200 rounded-lg mb-4"></div>
-                <h3 className="text-xl font-semibold text-secondary-900 mb-2">
-                  Project {project}
-                </h3>
-                <p className="text-secondary-600 mb-4">
-                  Description of the project and technologies used to build it.
-                </p>
-                <div className="flex space-x-4">
-                  <a href="#" className="text-primary-600 hover:text-primary-700">
-                    View Live
-                  </a>
-                  <a href="#" className="text-secondary-600 hover:text-secondary-700">
-                    View Code
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Link to="/portfolio" className="btn-primary inline-flex items-center space-x-2">
-              <span>View All Projects</span>
-              <FiArrowRight className="h-5 w-5" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      <SkillsSection />
     </div>
   )
 }
