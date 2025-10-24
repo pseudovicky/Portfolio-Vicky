@@ -311,37 +311,15 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            {/* Built for Developer Intelligence style tagline - moved to top */}
-            <motion.div 
-              className="mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1 }}
-            >
-              <p className="text-base lg:text-lg text-gray-600">
-                Built for <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent font-semibold">Developer Intelligence</span>.
-              </p>
-            </motion.div>
-
-            {/* Typing Effect for Name with more top padding */}
+            {/* Typing Effect for Name */}
             <motion.div
-              className="pt-12 mb-12"
+              className="mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
             >
               <TypewriterEffectSmoothDemo />
             </motion.div>
-            
-            {/* Subtitle */}
-            <motion.p 
-              className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.5 }}
-            >
-              On the way of learning, connecting the dots.
-            </motion.p>
           </motion.div>
         </div>
       </section>
