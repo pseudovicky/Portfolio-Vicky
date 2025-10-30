@@ -7,7 +7,7 @@ import {
   SiTypescript, SiRedux, SiNextdotjs, SiVercel, SiAmazon,
   SiFigma, SiGraphql, SiFirebase, SiTensorflow, SiPandas
 } from 'react-icons/si'
-import { ThreeDMarqueeDemo } from './ThreeDMarqueeDemo.jsx'
+import LogoMarquee from './LogoMarquee.jsx'
 
 const Word = ({ children, range, progress }) => {
   const opacity = useTransform(progress, range, [0.1, 1])
@@ -239,7 +239,7 @@ const SkillsSection = () => {
             </motion.p>
           </div>
           
-          <ThreeDMarqueeDemo />
+          <LogoMarquee />
         </motion.div>
 
         {/* Bottom CTA */}

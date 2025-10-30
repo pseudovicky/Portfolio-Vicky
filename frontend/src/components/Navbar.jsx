@@ -15,6 +15,29 @@ const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth()
   const location = useLocation()
 
+  // Theme toggle (light / dark)
+  const [isDark, setIsDark] = useState(false)
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('theme')
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      const initial = stored ? stored === 'dark' : prefersDark
+      setIsDark(initial)
+      document.documentElement.classList.toggle('dark', initial)
+    } catch (e) {
+      // ignore in SSR or restricted environments
+    }
+  }, [])
+
+  const toggleTheme = () => {
+    const next = !isDark
+    setIsDark(next)
+    try {
+      document.documentElement.classList.toggle('dark', next)
+      localStorage.setItem('theme', next ? 'dark' : 'light')
+    } catch (e) {}
+  }
+
   // Handle wave effect on logo click
   const handleLogoClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -33,6 +56,17 @@ const Navbar = () => {
     setTimeout(() => {
       setWaves(prev => prev.filter(w => w.id !== newWave.id))
     }, 2000)
+    
+    // Remove focus from the logo after click so the hover label doesn't stick
+    // (keeps keyboard-focus behavior intact because we only blur on click)
+    try {
+      if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
+        // small timeout to allow link navigation/wave to start
+        setTimeout(() => e.currentTarget.blur(), 80)
+      }
+    } catch (err) {
+      // ignore
+    }
   }
 
   const navigation = [
@@ -425,21 +459,47 @@ const Navbar = () => {
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       
       <nav className="bg-white/95 backdrop-blur-xl border-b border-gray-100 fixed top-0 left-0 right-0 z-50">
+        <style>{`
+          /* Logo hover/focus reveal: show name below the logo */
+          .vertical-name { opacity: 0; transform: translateY(-6px); transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+          .logo-wrapper:hover .vertical-name, .logo-wrapper:focus-within .vertical-name { opacity: 1 !important; transform: translateY(0) !important; }
+          @media (max-width: 768px) { .vertical-name { display: none !important; } }
+        `}</style>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-11">
             {/* Custom Logo */}
             <div className="flex-shrink-0">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 onClick={handleLogoClick}
-                className="transition-all duration-200 transform hover:scale-110"
+                className="transition-all duration-200 transform hover:scale-110 logo-wrapper relative inline-flex items-center"
               >
-                <img 
-                  src="/logo.png" 
-                  alt="Logo" 
+                <img
+                  src="/logo.png"
+                  alt="Logo"
                   className="h-8 w-auto object-contain"
                 />
                 <span className="sr-only">Home</span>
+
+                {/* Name reveal on hover - appears below the logo */}
+                <span
+                  className="vertical-name"
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: 'calc(100% + 6px)',
+                    transform: 'translateX(-50%)',
+                    color: '#39A7FF',
+                    fontWeight: 600,
+                    fontSize: '13px',
+                    letterSpacing: '1px',
+                    opacity: 0,
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  Vicky Kumar
+                </span>
               </Link>
             </div>
 
@@ -481,12 +541,34 @@ const Navbar = () => {
                   Press ⌘K to search
                 </div>
               </button>
-              
-              {/* Shopping Bag */}
-              <button className="text-gray-800 hover:text-black transition-all duration-200 transform hover:scale-110">
-                <FiShoppingBag className="h-4 w-4" />
-              </button>
 
+              {/* Theme Toggle (light / dark) */}
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="ml-2 p-2 rounded-md bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                title="Toggle theme"
+              >
+                {isDark ? (
+                  // Sun icon for dark -> light
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="M4.93 4.93l1.41 1.41"></path>
+                    <path d="M18.36 18.36l1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="M4.93 19.07l1.41-1.41"></path>
+                    <path d="M18.36 5.64l1.41-1.41"></path>
+                  </svg>
+                ) : (
+                  // Moon icon for light -> dark
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                  </svg>
+                )}
+              </button>
               {/* Auth Section */}
               {isAuthenticated ? (
                 <div className="relative dropdown-container">
