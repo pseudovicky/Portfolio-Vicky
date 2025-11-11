@@ -327,9 +327,9 @@ const Home = () => {
       </section>
 
       {/* Scrolling Text Reveal Section */}
-      <ScrollingTextReveal />
+  <ScrollingTextReveal />
 
-      {/* Intro Card Section */}
+  {/* Intro Card Section */}
       <IntroCard />
 
       {/* Skills Section */}

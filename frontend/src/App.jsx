@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import GoogleAuthPopup from './components/GoogleAuthPopup'
+import WaveEffect from './components/WaveEffect'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -36,9 +38,51 @@ import Explorer from './pages/persona/Explorer'
 import Others from './pages/persona/Others'
 
 function App() {
+  const [showWave, setShowWave] = useState(false)
+  const [triggerWave, setTriggerWave] = useState(0)
+  const [waveOrigin, setWaveOrigin] = useState(null)
+
+  // Trigger wave effect on initial load - get logo position
+  useEffect(() => {
+    // Scroll to top on page refresh/load
+    window.scrollTo(0, 0)
+    
+    // Wait for DOM to be ready and get logo position
+    const timer = setTimeout(() => {
+      const logo = document.querySelector('a[href="/"]')
+      if (logo) {
+        const rect = logo.getBoundingClientRect()
+        setWaveOrigin({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 })
+      } else {
+        // Fallback to top-left if logo not found
+        setWaveOrigin({ x: 80, y: 24 })
+      }
+      setShowWave(true)
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  // Function to trigger wave effect (will be passed to Navbar)
+  const handleWaveTrigger = (origin) => {
+    setTriggerWave(prev => prev + 1)
+    setWaveOrigin(origin)
+    setShowWave(true)
+  }
+
+  const handleWaveComplete = () => {
+    setShowWave(false)
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <WaveEffect 
+        isActive={showWave} 
+        onComplete={handleWaveComplete}
+        origin={waveOrigin}
+        key={triggerWave}
+      />
+      <Navbar onLogoClick={handleWaveTrigger} />
       <GoogleAuthPopup />
       <main className="flex-grow pt-11">
         <Routes>

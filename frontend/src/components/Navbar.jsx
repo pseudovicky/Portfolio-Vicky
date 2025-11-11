@@ -5,13 +5,12 @@ import { useAuth } from '../context/AuthContext'
 import { FiMenu, FiX, FiUser, FiLogOut, FiSettings, FiSearch, FiShoppingBag } from 'react-icons/fi'
 import SearchModal from './SearchModal'
 
-const Navbar = () => {
+const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [dropdownTimeout, setDropdownTimeout] = useState(null)
-  const [waves, setWaves] = useState([])
   const { isAuthenticated, user, logout } = useAuth()
   const location = useLocation()
 
@@ -41,21 +40,16 @@ const Navbar = () => {
   // Handle wave effect on logo click
   const handleLogoClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
-    const x = rect.left
-    const y = rect.top
+    const x = rect.left + rect.width / 2
+    const y = rect.top + rect.height / 2
     
-    const newWave = {
-      id: Date.now(),
-      x,
-      y
+    // Scroll to top (hero section)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    
+    // Trigger the main wave effect with origin coordinates
+    if (triggerWaveEffect) {
+      triggerWaveEffect({ x, y })
     }
-    
-    setWaves(prev => [...prev, newWave])
-    
-    // Remove wave after animation completes
-    setTimeout(() => {
-      setWaves(prev => prev.filter(w => w.id !== newWave.id))
-    }, 2000)
     
     // Remove focus from the logo after click so the hover label doesn't stick
     // (keeps keyboard-focus behavior intact because we only blur on click)
@@ -425,46 +419,10 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Wave Effect Container */}
-      <div className="fixed inset-0 pointer-events-none z-[60]">
-        {waves.map(wave => (
-          <motion.div
-            key={wave.id}
-            className="absolute rounded-full border-4 border-blue-500"
-            style={{
-              left: wave.x,
-              top: wave.y,
-              width: 40,
-              height: 40,
-            }}
-            initial={{ 
-              scale: 0, 
-              opacity: 1,
-              borderWidth: 4
-            }}
-            animate={{ 
-              scale: [1, 20, 40],
-              opacity: [1, 0.5, 0],
-              borderWidth: [4, 2, 0]
-            }}
-            transition={{ 
-              duration: 2,
-              ease: "easeOut"
-            }}
-          />
-        ))}
-      </div>
-
       {/* Search Modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       
       <nav className="bg-white/95 backdrop-blur-xl border-b border-gray-100 fixed top-0 left-0 right-0 z-50">
-        <style>{`
-          /* Logo hover/focus reveal: show name below the logo */
-          .vertical-name { opacity: 0; transform: translateY(-6px); transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1); pointer-events: none; }
-          .logo-wrapper:hover .vertical-name, .logo-wrapper:focus-within .vertical-name { opacity: 1 !important; transform: translateY(0) !important; }
-          @media (max-width: 768px) { .vertical-name { display: none !important; } }
-        `}</style>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-11">
             {/* Custom Logo */}
@@ -472,7 +430,7 @@ const Navbar = () => {
               <Link
                 to="/"
                 onClick={handleLogoClick}
-                className="transition-all duration-200 transform hover:scale-110 logo-wrapper relative inline-flex items-center"
+                className="transition-all duration-200 transform hover:scale-110"
               >
                 <img
                   src="/logo.png"
@@ -480,26 +438,6 @@ const Navbar = () => {
                   className="h-8 w-auto object-contain"
                 />
                 <span className="sr-only">Home</span>
-
-                {/* Name reveal on hover - appears below the logo */}
-                <span
-                  className="vertical-name"
-                  aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: 'calc(100% + 6px)',
-                    transform: 'translateX(-50%)',
-                    color: '#39A7FF',
-                    fontWeight: 600,
-                    fontSize: '13px',
-                    letterSpacing: '1px',
-                    opacity: 0,
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  Vicky Kumar
-                </span>
               </Link>
             </div>
 
