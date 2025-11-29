@@ -7,8 +7,8 @@ import WaveEffect from './components/WaveEffect'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import Portfolio from './pages/Portfolio'
 import Contact from './pages/Contact'
+import Research from './pages/Research'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
@@ -88,8 +88,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/research" element={<Research />} />
           <Route path="/journey" element={<Journey />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/resume/data-analyst/CV" element={<DataAnalystCV />} />

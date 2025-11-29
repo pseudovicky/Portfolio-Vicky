@@ -1,28 +1,16 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const IntroCard = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Title */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-            Take a closer look.
-          </h2>
-        </motion.div>
-
+    <section className="min-h-screen flex items-center py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
         {/* Card Container */}
         <motion.div
           className="relative rounded-[40px] overflow-hidden shadow-2xl"
           style={{
             background: 'linear-gradient(135deg, #e5e7eb 0%, #f3e6d8 50%, #f4a261 100%)',
-            minHeight: '500px'
+            minHeight: '600px'
           }}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,16 +35,27 @@ const IntroCard = () => {
               </h3>
               
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                Exploring the intersection of technology and design, building solutions that make a difference.
+                Vicky is a <span className="font-bold text-gray-900">Computer Science Master's student</span> at 
+                <span className="font-bold text-gray-900"> Lovely Professional University</span>, specializing in 
+                <span className="font-bold text-gray-900"> Artificial Intelligence and Machine Learning</span>. 
+                With a passion for transforming data into actionable insights, he bridges the gap between 
+                cutting-edge technology and real-world solutions.
               </p>
 
-              <motion.button
-                className="mt-6 px-8 py-4 bg-gray-900 text-white rounded-full text-base md:text-lg font-semibold hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Explore My Work
-              </motion.button>
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                From building scalable web applications to developing intelligent ML models, 
+                every project is a step towards innovation and excellence.
+              </p>
+
+              <Link to="/project">
+                <motion.button
+                  className="mt-6 px-8 py-4 bg-gray-900 text-white rounded-full text-base md:text-lg font-semibold hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Explore My Work
+                </motion.button>
+              </Link>
             </motion.div>
 
             {/* Right Image */}

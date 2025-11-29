@@ -3,71 +3,66 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function TypewriterEffectSmoothDemo() {
-  const [displayedText, setDisplayedText] = useState('');
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [displayedRole, setDisplayedRole] = useState('');
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showPrefix, setShowPrefix] = useState(false);
   
-  const words = [
-    { text: "I'm", color: "text-black" },
-    { text: "Vicky", color: "text-blue-500" },
-    { text: "Kumar", color: "text-blue-500" }
+  // The prefix stays constant after first typing
+  const prefix = "I'm ";
+  
+  // Only the changing part of each phrase
+  const roles = [
+    "Vicky Kumar",
+    "a Python Developer",
+    "a Full Stack Developer",
+    "a Data Engineer",
+    "a Data Analyst",
+    "a MERN Stack Developer",
+    "a Data Science Enthusiast",
+    "a Machine Learning Engineer"
   ];
   
-  const typeSpeed = 100;
-  const deleteSpeed = 50;
-  const pauseDuration = 3000;
+  const typeSpeed = 80;
+  const deleteSpeed = 40;
+  const pauseDuration = 2000;
 
   useEffect(() => {
+    const currentRole = roles[currentRoleIndex];
+    
     const timeout = setTimeout(() => {
-      const fullText = words.map(word => word.text).join(' ');
-      
       if (!isDeleting) {
         // Typing
-        if (displayedText.length < fullText.length) {
-          setDisplayedText(fullText.slice(0, displayedText.length + 1));
+        if (displayedRole.length < currentRole.length) {
+          setDisplayedRole(currentRole.slice(0, displayedRole.length + 1));
+          // Show prefix after first character is typed
+          if (!showPrefix) setShowPrefix(true);
         } else {
           // Finished typing, wait then start deleting
           setTimeout(() => setIsDeleting(true), pauseDuration);
         }
       } else {
-        // Deleting
-        if (displayedText.length > 0) {
-          setDisplayedText(fullText.slice(0, displayedText.length - 1));
+        // Deleting - only delete the role, keep the prefix
+        if (displayedRole.length > 0) {
+          setDisplayedRole(currentRole.slice(0, displayedRole.length - 1));
         } else {
-          // Finished deleting, start typing again
+          // Finished deleting, move to next role
           setIsDeleting(false);
+          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
         }
       }
     }, isDeleting ? deleteSpeed : typeSpeed);
 
     return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting]);
-
-  const renderColoredText = () => {
-    const fullText = words.map(word => word.text).join(' ');
-    let charIndex = 0;
-    
-    return words.map((word, wordIndex) => {
-      const wordStart = charIndex;
-      const wordEnd = charIndex + word.text.length;
-      const visiblePart = displayedText.slice(wordStart, wordEnd + 1); // +1 for space
-      charIndex += word.text.length + 1; // +1 for space
-      
-      return (
-        <span key={wordIndex} className={word.color}>
-          {visiblePart}
-        </span>
-      );
-    });
-  };
+  }, [displayedRole, isDeleting, currentRoleIndex, showPrefix]);
 
   return (
-    <div className="flex items-center justify-center mb-8">
-      <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
-        {renderColoredText()}
+    <div className="flex items-center justify-center">
+      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center">
+        {showPrefix && <span className="text-black">{prefix}</span>}
+        <span className="text-blue-500">{displayedRole}</span>
         <motion.span
-          className="inline-block w-1 h-8 sm:h-12 md:h-16 lg:h-20 xl:h-24 bg-black ml-2"
+          className="inline-block w-1 h-8 sm:h-12 md:h-16 lg:h-20 xl:h-24 bg-blue-500 ml-2"
           animate={{ opacity: [0, 1] }}
           transition={{
             duration: 0.8,

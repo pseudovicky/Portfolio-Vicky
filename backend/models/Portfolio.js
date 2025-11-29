@@ -29,12 +29,32 @@ const portfolioSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['web', 'mobile', 'desktop', 'other'],
+    enum: ['web', 'mobile', 'desktop', 'ml', 'data-science', 'research', 'other'],
     default: 'web'
   },
   featured: {
     type: Boolean,
     default: false
+  },
+  projectDate: {
+    type: String,
+    trim: true
+  },
+  metrics: {
+    type: Map,
+    of: String
+  },
+  reportUrl: {
+    type: String,
+    trim: true
+  },
+  highlights: [{
+    type: String
+  }],
+  type: {
+    type: String,
+    enum: ['project', 'research'],
+    default: 'project'
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

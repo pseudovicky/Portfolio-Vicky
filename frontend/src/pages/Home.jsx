@@ -6,6 +6,7 @@ import TypewriterEffectSmoothDemo from '../components/typewriter-effect-demo-1.j
 import ScrollingTextReveal from '../components/ScrollingTextReveal.jsx'
 import IntroCard from '../components/IntroCard.jsx'
 import SkillsSection from '../components/SkillsSection.jsx'
+import HomeHeroNetwork from '../components/HomeHeroNetwork.jsx'
 
 // Typing Text Component
 const TypingText = ({ text, speed = 100, pauseDuration = 2000 }) => {
@@ -196,50 +197,115 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Apple MacBook Style */}
-      <section className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200 flex flex-col items-center justify-center relative overflow-hidden">
-        {/* Background Code Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 text-green-500 font-mono text-xs">
-            const developer = "Vicky Kumar";
-          </div>
-          <div className="absolute top-20 right-20 text-green-500 font-mono text-xs">
-            function createAwesome() {"{"}
-          </div>
-          <div className="absolute bottom-20 left-20 text-green-500 font-mono text-xs">
-            return innovation;
-          </div>
-          <div className="absolute bottom-10 right-10 text-green-500 font-mono text-xs">
-            {"}"}
-          </div>
+      {/* Hero Intro Section - First 100vh */}
+      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-white">
+        {/* Animated Particle Network Background */}
+        <div className="absolute inset-0" style={{ height: '100vh' }}>
+          <HomeHeroNetwork />
         </div>
 
-        {/* Main Content Container with Flex Layout */}
-        <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl mx-auto px-4 relative z-10 gap-12">
-          {/* Left Side - MacBook */}
+        {/* Hero Content */}
+        <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
+          {/* Greeting */}
+          <motion.p
+            className="text-xl md:text-2xl text-gray-700 mb-6 font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Hi! I'm Vicky Kumar
+          </motion.p>
+
+          {/* Main Title */}
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-black mb-4 tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            Full Stack Developer
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.h2
+            className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700 mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            & Aspiring Data Scientist
+          </motion.h2>
+
+          {/* Location Row with Image */}
+          <motion.div
+            className="flex items-center justify-center gap-4 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            {/* Profile Image */}
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border-2 border-gray-300 shadow-lg">
+              <img
+                src="/IMG-20250405-WA0026.jpg"
+                alt="Vicky Kumar"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Based in text */}
+            <span className="text-3xl md:text-5xl font-light italic text-gray-700">
+              based in
+            </span>
+            
+            {/* Location Badge */}
+            <span className="text-2xl md:text-4xl font-bold bg-black text-white px-6 py-2 rounded-lg">
+              India.
+            </span>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            A <span className="font-bold text-black">Data Science student</span> with expertise in 
+            <span className="font-bold text-black"> Python</span>, <span className="font-bold text-black">Machine Learning</span>, and 
+            <span className="font-bold text-black"> Artificial Intelligence</span>. I build intelligent systems and 
+            scalable web applications that transform ideas into impactful solutions.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Code Editor Section - Full Screen */}
+      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-white">
+        <div className="w-full max-w-7xl mx-auto px-4">
+          {/* MacBook with Code - Full Width */}
           <motion.div 
-            className="flex-1 max-w-3xl w-full"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            className="w-full"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* MacBook Base - Responsive width */}
+            {/* MacBook Base - Full width */}
             <div className="relative w-full">
               {/* MacBook Screen */}
-              <div className="bg-gray-800 rounded-t-lg p-4 shadow-2xl border-8 border-gray-200 w-full">
+              <div className="bg-gray-800 rounded-t-2xl p-6 shadow-2xl border-[12px] border-gray-200 w-full">
                 {/* Screen Header with Tabs */}
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                  <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                  <div className="w-4 h-4 bg-green-500 rounded-full"></div>
                   
                   {/* Tabs */}
-                  <div className="flex ml-4 space-x-1">
+                  <div className="flex ml-6 space-x-2">
                     {tabs.map((tab) => (
                       <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`px-3 py-1 rounded text-xs font-medium transition-all duration-200 flex items-center space-x-1 ${
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 ${
                           activeTab === tab.id 
                             ? 'bg-gray-600 text-white' 
                             : 'bg-gray-700 text-gray-300 hover:bg-gray-650'
@@ -249,10 +315,9 @@ const Home = () => {
                         <span>{tab.name}</span>
                         {activeTab === tab.id && (
                           <span 
-                            className="ml-1 text-gray-400 hover:text-white cursor-pointer text-xs"
+                            className="ml-2 text-gray-400 hover:text-white cursor-pointer"
                             onClick={(e) => {
                               e.stopPropagation()
-                              // Close tab functionality could go here
                             }}
                           >
                             ×
@@ -263,11 +328,11 @@ const Home = () => {
                   </div>
                 </div>
                 
-                {/* Code Content */}
-                <div className="bg-gray-900 rounded p-6 font-mono text-sm leading-relaxed h-64 md:h-80 overflow-hidden">
+                {/* Code Content - Larger */}
+                <div className="bg-gray-900 rounded-xl p-8 font-mono text-base md:text-lg leading-loose h-[400px] md:h-[500px] overflow-hidden">
                   <motion.div 
-                    className="space-y-1"
-                    key={activeTab} // Re-animate when tab changes
+                    className="space-y-2"
+                    key={activeTab}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
@@ -287,7 +352,7 @@ const Home = () => {
                   
                   {/* Blinking cursor */}
                   <motion.div 
-                    className="inline-block w-2 h-5 bg-green-400 ml-1 mt-2"
+                    className="inline-block w-3 h-6 bg-green-400 ml-1 mt-4"
                     animate={{ opacity: [0, 1] }}
                     transition={{ repeat: Infinity, duration: 1 }}
                   ></motion.div>
@@ -295,35 +360,30 @@ const Home = () => {
               </div>
               
               {/* MacBook Keyboard/Base */}
-              <div className="bg-gray-200 h-8 rounded-b-lg shadow-2xl relative w-full">
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-200 to-gray-300 rounded-b-lg"></div>
+              <div className="bg-gray-200 h-10 rounded-b-2xl shadow-2xl relative w-full">
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-200 to-gray-300 rounded-b-2xl"></div>
                 {/* Trackpad */}
-                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-400 rounded opacity-50"></div>
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-gray-400 rounded opacity-50"></div>
               </div>
               
               {/* MacBook Reflection */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-300 opacity-20 rounded-lg transform translate-y-2 blur-sm scale-y-[-1]"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-300 opacity-20 rounded-2xl transform translate-y-2 blur-sm scale-y-[-1]"></div>
             </div>
           </motion.div>
-
-          {/* Right Side - Typing Text */}
-          <motion.div 
-            className="flex-1 text-center lg:text-left"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            {/* Typing Effect for Name */}
-            <motion.div
-              className="mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <TypewriterEffectSmoothDemo />
-            </motion.div>
-          </motion.div>
         </div>
+      </section>
+
+      {/* Typing Effect Section - Full 100vh */}
+      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gray-50">
+        <motion.div 
+          className="text-center px-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <TypewriterEffectSmoothDemo />
+        </motion.div>
       </section>
 
       {/* Scrolling Text Reveal Section */}
