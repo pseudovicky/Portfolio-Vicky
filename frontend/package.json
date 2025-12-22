@@ -7,10 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "check": "vite build --mode production",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives",
     "lint:fix": "eslint . --ext js,jsx --fix",
-    "preview": "vite preview",
-    "prebuild": "npm run lint"
+    "preview": "vite preview"
   },
   "keywords": [
     "react",

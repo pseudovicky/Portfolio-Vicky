@@ -165,3 +165,20 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Apple-style gradient animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-shift 4s ease infinite;
+}

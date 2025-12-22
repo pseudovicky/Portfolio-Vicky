@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 
 const IntroCard = () => {
   return (
-    <section className="min-h-screen flex items-center py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+    <section className="flex items-center pb-12 bg-transparent">
+      <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20 w-full">
         {/* Card Container */}
         <motion.div
-          className="relative rounded-[40px] overflow-hidden shadow-2xl"
+          className="relative rounded-b-[40px] overflow-hidden shadow-2xl"
           style={{
-            background: 'linear-gradient(135deg, #e5e7eb 0%, #f3e6d8 50%, #f4a261 100%)',
-            minHeight: '600px'
+            background: 'linear-gradient(135deg, #93c5fd 0%, #bfdbfe 25%, #fef3c7 50%, #fdba74 75%, #fb923c 100%)',
+            minHeight: '400px'
           }}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,14 +26,6 @@ const IntroCard = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
-                A Journey Through
-                <br />
-                Innovation, Code,
-                <br />
-                and Creativity
-              </h3>
-              
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 Vicky is a <span className="font-bold text-gray-900">Computer Science Master's student</span> at 
                 <span className="font-bold text-gray-900"> Lovely Professional University</span>, specializing in 

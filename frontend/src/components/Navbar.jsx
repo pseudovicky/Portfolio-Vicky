@@ -480,33 +480,6 @@ const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
                 </div>
               </button>
 
-              {/* Theme Toggle (light / dark) */}
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="ml-2 p-2 rounded-md bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                title="Toggle theme"
-              >
-                {isDark ? (
-                  // Sun icon for dark -> light
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2"></path>
-                    <path d="M12 20v2"></path>
-                    <path d="M4.93 4.93l1.41 1.41"></path>
-                    <path d="M18.36 18.36l1.41 1.41"></path>
-                    <path d="M2 12h2"></path>
-                    <path d="M20 12h2"></path>
-                    <path d="M4.93 19.07l1.41-1.41"></path>
-                    <path d="M18.36 5.64l1.41-1.41"></path>
-                  </svg>
-                ) : (
-                  // Moon icon for light -> dark
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                  </svg>
-                )}
-              </button>
               {/* Auth Section */}
               {isAuthenticated ? (
                 <div className="relative dropdown-container">
@@ -546,7 +519,7 @@ const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
                   className="text-xs font-normal text-gray-800 hover:text-black transition-colors duration-200"
                   style={{ fontSize: '12px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                 >
-                  Sign In
+                  Admin Sign In
                 </Link>
               )}
             </div>
@@ -624,7 +597,7 @@ const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
                       onClick={() => setIsOpen(false)}
                       style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                     >
-                      Sign In
+                      Admin Sign In
                     </Link>
                   )}
                 </div>

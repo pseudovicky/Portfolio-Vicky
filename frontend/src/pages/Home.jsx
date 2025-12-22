@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
-import TypewriterEffectSmoothDemo from '../components/typewriter-effect-demo-1.jsx'
-import ScrollingTextReveal from '../components/ScrollingTextReveal.jsx'
 import IntroCard from '../components/IntroCard.jsx'
-import SkillsSection from '../components/SkillsSection.jsx'
 import HomeHeroNetwork from '../components/HomeHeroNetwork.jsx'
 
 // Typing Text Component
@@ -278,9 +275,71 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Code Editor Section - Full Screen */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-white">
-        <div className="w-full max-w-7xl mx-auto px-4">
+      {/* 10px spacer between hero and gradient */}
+      <div className="h-[10px] bg-white" />
+
+      {/* Heading above the card - Apple style */}
+      <section className="bg-white pt-20 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20 w-full">
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            A Journey Through Code, Creativity,<br />
+            and Innovation.
+          </motion.h2>
+        </div>
+      </section>
+
+      {/* Apple-style Holiday Gradient Banner - Behind the card */}
+      <section className="bg-white relative z-0">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20 w-full">
+          <motion.div 
+            className="w-full h-[80px] md:h-[100px] overflow-hidden relative rounded-t-[40px]"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            {/* Main gradient layer - Simple Blue to Orange */}
+            <motion.div 
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(90deg, #93c5fd 0%, #bfdbfe 25%, #fef3c7 50%, #fdba74 75%, #fb923c 100%)',
+                backgroundSize: '200% 100%',
+              }}
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 8,
+                ease: 'linear',
+                repeat: Infinity,
+              }}
+            />
+            
+            {/* Top fade to white */}
+            <div 
+              className="absolute inset-x-0 top-0 h-12 md:h-16"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 40%, transparent 100%)',
+              }}
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Intro Card Section - Over the gradient */}
+      <section className="relative z-10 -mt-8 bg-transparent">
+        <IntroCard />
+      </section>
+
+      {/* Code Editor Section */}
+      <section className="py-16 md:py-24 relative overflow-hidden bg-white">
+        <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
           {/* MacBook with Code - Full Width */}
           <motion.div 
             className="w-full"
@@ -372,28 +431,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Typing Effect Section - Full 100vh */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gray-50">
-        <motion.div 
-          className="text-center px-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <TypewriterEffectSmoothDemo />
-        </motion.div>
-      </section>
-
-      {/* Scrolling Text Reveal Section */}
-  <ScrollingTextReveal />
-
-  {/* Intro Card Section */}
-      <IntroCard />
-
-      {/* Skills Section */}
-      <SkillsSection />
     </div>
   )
 }
