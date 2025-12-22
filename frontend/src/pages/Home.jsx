@@ -282,7 +282,8 @@ const Home = () => {
       <section className="bg-white pt-20 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20">
         <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20 w-full">
           <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight"
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900"
+            style={{ lineHeight: '1.2' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

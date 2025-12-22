@@ -58,20 +58,20 @@ const IntroCard = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div className="relative w-full max-w-md">
+              <div className="relative w-full max-w-xs">
                 {/* Main Image */}
                 <motion.img
                   src="/IMG-20250405-WA0026.jpg"
                   alt="Vicky Kumar"
-                  className="w-full h-auto rounded-3xl shadow-2xl object-cover"
+                  className="w-full h-auto rounded-2xl shadow-xl object-cover"
                   style={{ aspectRatio: '3/4' }}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 />
                 
                 {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-orange-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-500 rounded-full blur-2xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute -top-3 -right-3 w-16 h-16 bg-orange-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+                <div className="absolute -bottom-3 -left-3 w-20 h-20 bg-blue-500 rounded-full blur-2xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
               </div>
             </motion.div>
           </div>
