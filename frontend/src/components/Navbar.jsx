@@ -519,7 +519,7 @@ const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
                   className="text-xs font-normal text-gray-800 hover:text-black transition-colors duration-200"
                   style={{ fontSize: '12px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                 >
-                  Admin Sign In
+                  Admin Login
                 </Link>
               )}
             </div>
@@ -597,7 +597,7 @@ const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
                       onClick={() => setIsOpen(false)}
                       style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
                     >
-                      Admin Sign In
+                      Admin Login
                     </Link>
                   )}
                 </div>

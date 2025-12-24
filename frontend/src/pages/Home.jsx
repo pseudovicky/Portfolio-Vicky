@@ -54,8 +54,6 @@ const TypingText = ({ text, speed = 100, pauseDuration = 2000 }) => {
 }
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('script.js')
-  
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -68,128 +66,6 @@ const Home = () => {
         staggerChildren: 0.1
       }
     }
-  }
-
-  const tabs = [
-    { 
-      id: 'script.js', 
-      name: 'script.js', 
-      icon: '⚡',
-      content: {
-        language: 'javascript',
-        code: [
-          { text: '// Portfolio Interactive Features', color: 'text-gray-500' },
-          { text: 'const developer = "Vicky Kumar";', color: 'text-white' },
-          { text: '', color: 'text-white' },
-          { text: 'class PortfolioApp {', color: 'text-yellow-300' },
-          { text: '  constructor() {', color: 'text-blue-400' },
-          { text: '    this.skills = [', color: 'text-purple-400' },
-          { text: '      "React", "Node.js", "MongoDB",', color: 'text-green-400' },
-          { text: '      "Express", "JavaScript", "Python"', color: 'text-green-400' },
-          { text: '    ];', color: 'text-white' },
-          { text: '    this.init();', color: 'text-white' },
-          { text: '  }', color: 'text-white' },
-          { text: '', color: 'text-white' },
-          { text: '  init() {', color: 'text-blue-400' },
-          { text: '    console.log(`Welcome ${developer}!`);', color: 'text-white' },
-          { text: '    this.loadProjects();', color: 'text-white' },
-          { text: '  }', color: 'text-white' },
-          { text: '', color: 'text-white' },
-          { text: '  async loadProjects() {', color: 'text-blue-400' },
-          { text: '    return this.skills.map(skill => ({', color: 'text-purple-400' },
-          { text: '      name: skill, level: "Expert"', color: 'text-green-400' },
-          { text: '    }));', color: 'text-white' },
-          { text: '  }', color: 'text-white' },
-          { text: '}', color: 'text-white' },
-          { text: '', color: 'text-white' },
-          { text: 'new PortfolioApp();', color: 'text-yellow-300' }
-        ]
-      }
-    },
-    { 
-      id: 'index.html', 
-      name: 'index.html', 
-      icon: '🌐',
-      content: {
-        language: 'html',
-        code: [
-          { text: '<!DOCTYPE html>', color: 'text-gray-500' },
-          { text: '<html lang="en">', color: 'text-red-400' },
-          { text: '<head>', color: 'text-red-400' },
-          { text: '  <meta charset="UTF-8">', color: 'text-blue-400' },
-          { text: '  <title>Vicky Kumar - Portfolio</title>', color: 'text-blue-400' },
-          { text: '  <link rel="stylesheet" href="style.css">', color: 'text-blue-400' },
-          { text: '</head>', color: 'text-red-400' },
-          { text: '<body>', color: 'text-red-400' },
-          { text: '  <div class="container">', color: 'text-blue-400' },
-          { text: '    <h1>', color: 'text-red-400' },
-          { text: '      Welcome to My Portfolio', color: 'text-green-400' },
-          { text: '    </h1>', color: 'text-red-400' },
-          { text: '    <p class="intro">', color: 'text-blue-400' },
-          { text: '      Full Stack Developer', color: 'text-green-400' },
-          { text: '    </p>', color: 'text-blue-400' },
-          { text: '  </div>', color: 'text-blue-400' },
-          { text: '</body>', color: 'text-red-400' },
-          { text: '</html>', color: 'text-red-400' }
-        ]
-      }
-    },
-    { 
-      id: 'style.css', 
-      name: 'style.css', 
-      icon: '🎨',
-      content: {
-        language: 'css',
-        code: [
-          { text: '/* Vicky Kumar - Portfolio Styles */', color: 'text-gray-500' },
-          { text: ':root {', color: 'text-yellow-300' },
-          { text: '  --primary-color: #3b82f6;', color: 'text-blue-400' },
-          { text: '  --secondary-color: #1f2937;', color: 'text-blue-400' },
-          { text: '  --accent-color: #10b981;', color: 'text-blue-400' },
-          { text: '  --text-color: #374151;', color: 'text-blue-400' },
-          { text: '}', color: 'text-yellow-300' },
-          { text: '', color: 'text-white' },
-          { text: '* {', color: 'text-yellow-300' },
-          { text: '  margin: 0;', color: 'text-blue-400' },
-          { text: '  padding: 0;', color: 'text-blue-400' },
-          { text: '  box-sizing: border-box;', color: 'text-blue-400' },
-          { text: '}', color: 'text-yellow-300' },
-          { text: '', color: 'text-white' },
-          { text: 'body {', color: 'text-yellow-300' },
-          { text: '  font-family: "SF Pro Display", sans-serif;', color: 'text-green-400' },
-          { text: '  line-height: 1.6;', color: 'text-blue-400' },
-          { text: '  color: var(--text-color);', color: 'text-blue-400' },
-          { text: '  background: linear-gradient(135deg, #f8fafc, #e2e8f0);', color: 'text-green-400' },
-          { text: '}', color: 'text-yellow-300' },
-          { text: '', color: 'text-white' },
-          { text: '.container {', color: 'text-yellow-300' },
-          { text: '  max-width: 1200px;', color: 'text-blue-400' },
-          { text: '  margin: 0 auto;', color: 'text-blue-400' },
-          { text: '  padding: 0 2rem;', color: 'text-blue-400' },
-          { text: '}', color: 'text-yellow-300' },
-          { text: '', color: 'text-white' },
-          { text: '.hero-section {', color: 'text-yellow-300' },
-          { text: '  min-height: 100vh;', color: 'text-blue-400' },
-          { text: '  display: flex;', color: 'text-blue-400' },
-          { text: '  align-items: center;', color: 'text-blue-400' },
-          { text: '  justify-content: center;', color: 'text-blue-400' },
-          { text: '  background: var(--primary-color);', color: 'text-blue-400' },
-          { text: '}', color: 'text-yellow-300' },
-          { text: '', color: 'text-white' },
-          { text: '.btn-primary {', color: 'text-yellow-300' },
-          { text: '  background: var(--accent-color);', color: 'text-blue-400' },
-          { text: '  color: white;', color: 'text-blue-400' },
-          { text: '  padding: 12px 24px;', color: 'text-blue-400' },
-          { text: '  border-radius: 8px;', color: 'text-blue-400' },
-          { text: '  transition: transform 0.2s ease;', color: 'text-purple-400' },
-          { text: '}', color: 'text-yellow-300' }
-        ]
-      }
-    }
-  ]
-
-  const getTabContent = () => {
-    return tabs.find(tab => tab.id === activeTab)?.content || tabs[0].content
   }
 
   return (
@@ -338,97 +214,151 @@ const Home = () => {
         <IntroCard />
       </section>
 
-      {/* Code Editor Section */}
-      <section className="py-16 md:py-24 relative overflow-hidden bg-white">
-        <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
-          {/* MacBook with Code - Full Width */}
-          <motion.div 
-            className="w-full"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {/* MacBook Base - Full width */}
-            <div className="relative w-full">
-              {/* MacBook Screen */}
-              <div className="bg-gray-800 rounded-t-2xl p-6 shadow-2xl border-[12px] border-gray-200 w-full">
-                {/* Screen Header with Tabs */}
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                  <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-                  <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                  
-                  {/* Tabs */}
-                  <div className="flex ml-6 space-x-2">
-                    {tabs.map((tab) => (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 ${
-                          activeTab === tab.id 
-                            ? 'bg-gray-600 text-white' 
-                            : 'bg-gray-700 text-gray-300 hover:bg-gray-650'
-                        }`}
+      {/* Learning Philosophy Section - Simple Editorial */}
+      <section className="pt-24 pb-28 md:pt-32 md:pb-36 bg-white">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20 w-full">
+          <h2 className="text-left text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-gray-900">
+            From what
+            <br />
+            I have learned so far.
+          </h2>
+          <p className="mt-10 md:mt-12 text-left text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed text-gray-500 max-w-4xl">
+            My way of learning is connecting the dots, finding meaning between ideas that seem unrelated.
+          </p>
+        </div>
+      </section>
+
+      {/* Black Section with LinkedIn Connect - 230vh */}
+      <section className="relative bg-black rounded-b-[120px]" style={{ height: '230vh' }}>
+        {/* Content positioned 30vh from top */}
+        <div className="absolute top-[30vh] left-0 right-0">
+          <div className="max-w-6xl mx-auto px-6 md:px-12">
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-white mb-16">
+                Let's{' '}
+                <span className="inline-flex items-center">
+                  <span className="relative inline-block px-6 py-3 mx-2 bg-gradient-to-r from-green-400 to-green-500 rounded-full">
+                    <svg 
+                      className="inline-block w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 mr-2" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2.5"
+                    >
+                      <path d="M9 11l3 3L22 4" />
+                      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+                    </svg>
+                    <span className="text-green-900 font-bold">connect</span>
+                  </span>
+                </span>{' '}
+                with me on
+                <br />
+                <a 
+                  href="https://www.linkedin.com/in/pseudovicky/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1 mt-4 transition-transform duration-300 hover:scale-105"
+                >
+                  <span className="text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">Linked</span>
+                  <span className="bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">in</span>
+                </a>
+
+                {/* "and" text centered */}
+                <div className="text-center my-12 md:my-16">
+                  <span className="text-white text-4xl md:text-5xl lg:text-6xl font-light">and</span>
+                </div>
+
+                {/* GitHub collaboration text */}
+                <div className="text-center">
+                  <h3 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-white">
+                    <span className="inline-flex items-center">
+                      <span className="relative inline-block px-6 py-3 mx-2 bg-gradient-to-r from-green-400 to-green-500 rounded-full">
+                        <svg 
+                          className="inline-block w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 mr-2" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2.5"
+                        >
+                          <path d="M9 11l3 3L22 4" />
+                          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+                        </svg>
+                        <span className="text-green-900 font-bold">collaborate</span>
+                      </span>
+                    </span>{' '}
+                    with
+                    <br />
+                    <span className="inline-block mt-4 md:mt-6">me on</span>
+                    <br />
+                    <a 
+                      href="https://github.com/pseudovicky" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-3 mt-6 md:mt-8 transition-transform duration-300 hover:scale-105"
+                    >
+                      <svg 
+                        className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 text-white" 
+                        viewBox="0 0 16 16" 
+                        fill="currentColor"
                       >
-                        <span>{tab.icon}</span>
-                        <span>{tab.name}</span>
-                        {activeTab === tab.id && (
-                          <span 
-                            className="ml-2 text-gray-400 hover:text-white cursor-pointer"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                            }}
-                          >
-                            ×
-                          </span>
-                        )}
-                      </button>
-                    ))}
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                      </svg>
+                      <span className="bg-black text-white px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg">GitHub</span>
+                    </a>
+                  </h3>
+
+                  {/* Closing message */}
+                  <div className="text-center mt-12 md:mt-16">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight">
+                      So we can build something{' '}
+                      <span className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent">
+                        amazing
+                      </span>{' '}
+                      together.
+                    </p>
                   </div>
                 </div>
-                
-                {/* Code Content - Larger */}
-                <div className="bg-gray-900 rounded-xl p-8 font-mono text-base md:text-lg leading-loose h-[400px] md:h-[500px] overflow-hidden">
-                  <motion.div 
-                    className="space-y-2"
-                    key={activeTab}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {getTabContent().code.map((line, index) => (
-                      <motion.div
-                        key={index}
-                        className={line.color}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                      >
-                        {line.text}
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                  
-                  {/* Blinking cursor */}
-                  <motion.div 
-                    className="inline-block w-3 h-6 bg-green-400 ml-1 mt-4"
-                    animate={{ opacity: [0, 1] }}
-                    transition={{ repeat: Infinity, duration: 1 }}
-                  ></motion.div>
-                </div>
-              </div>
-              
-              {/* MacBook Keyboard/Base */}
-              <div className="bg-gray-200 h-10 rounded-b-2xl shadow-2xl relative w-full">
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-200 to-gray-300 rounded-b-2xl"></div>
-                {/* Trackpad */}
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-gray-400 rounded opacity-50"></div>
-              </div>
-              
-              {/* MacBook Reflection */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-300 opacity-20 rounded-2xl transform translate-y-2 blur-sm scale-y-[-1]"></div>
-            </div>
+              </h2>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* White Section with Scrolling Text Animation */}
+      <section className="relative bg-white py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <motion.div
+            className="text-center overflow-hidden"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h2
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-orange-500 uppercase tracking-tight"
+              initial={{ opacity: 0, rotateX: 90, y: 100 }}
+              whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ 
+                duration: 1.2, 
+                ease: [0.25, 0.46, 0.45, 0.94],
+                opacity: { duration: 0.8 },
+                rotateX: { duration: 1.2 },
+                y: { duration: 1.2 }
+              }}
+              style={{ 
+                transformStyle: 'preserve-3d',
+                perspective: '1000px'
+              }}
+            >
+              Know more about my work
+            </motion.h2>
           </motion.div>
         </div>
       </section>
