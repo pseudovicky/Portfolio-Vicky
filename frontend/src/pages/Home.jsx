@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
+import { FiArrowRight, FiChevronRight, FiCpu, FiCode, FiDatabase, FiGithub, FiLayers, FiLinkedin, FiMail } from 'react-icons/fi'
 import IntroCard from '../components/IntroCard.jsx'
 import HomeHeroNetwork from '../components/HomeHeroNetwork.jsx'
 
@@ -116,14 +116,144 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {/* Profile Image */}
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border-2 border-gray-300 shadow-lg">
-              <img
-                src="/IMG-20250405-WA0026.jpg"
-                alt="Vicky Kumar"
-                className="w-full h-full object-cover"
-              />
+            {/* 3D Rotating Cube Profile */}
+            <div className="profile-cube-container" style={{ perspective: '1000px' }}>
+              <div className="profile-cube">
+                <div className="cube-face front">
+                  <img src="/IMG-20250405-WA0026.jpg" alt="Vicky" className="w-full h-full object-cover" />
+                </div>
+                <div className="cube-face back">
+                  <img src="/IMG-20250405-WA0026.jpg" alt="Vicky" className="w-full h-full object-cover" />
+                </div>
+                <div className="cube-face right">
+                  <img src="/IMG-20250405-WA0026.jpg" alt="Vicky" className="w-full h-full object-cover" />
+                </div>
+                <div className="cube-face left">
+                  <img src="/IMG-20250405-WA0026.jpg" alt="Vicky" className="w-full h-full object-cover" />
+                </div>
+                <div className="cube-face top">
+                  <img src="/IMG-20250405-WA0026.jpg" alt="Vicky" className="w-full h-full object-cover" />
+                </div>
+                <div className="cube-face bottom">
+                  <img src="/IMG-20250405-WA0026.jpg" alt="Vicky" className="w-full h-full object-cover" />
+                </div>
+              </div>
             </div>
+            
+            <style jsx>{`
+              .profile-cube-container {
+                width: 64px;
+                height: 64px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform-style: preserve-3d;
+              }
+              
+              @media (min-width: 768px) {
+                .profile-cube-container {
+                  width: 80px;
+                  height: 80px;
+                }
+              }
+              
+              .profile-cube {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: transform 1s ease;
+                cursor: pointer;
+              }
+              
+              .profile-cube:hover {
+                animation: rotate3d 8s infinite linear;
+              }
+              
+              .cube-face {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                backface-visibility: visible;
+                border-radius: 12px;
+                background: white;
+                transition: all 0.3s ease;
+                overflow: hidden;
+              }
+              
+              .cube-face::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+                top: -100%;
+                left: -100%;
+                transition: all 0.5s ease;
+              }
+              
+              .cube-face::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+              }
+              
+              .cube-face:hover::before {
+                top: 100%;
+                left: 100%;
+              }
+              
+              .cube-face:hover::after {
+                opacity: 1;
+              }
+              
+              .front {
+                transform: translateZ(32px);
+              }
+              
+              .back {
+                transform: translateZ(-32px) rotateY(180deg);
+              }
+              
+              .right {
+                transform: translateX(32px) rotateY(90deg);
+              }
+              
+              .left {
+                transform: translateX(-32px) rotateY(-90deg);
+              }
+              
+              .top {
+                transform: translateY(-32px) rotateX(90deg);
+              }
+              
+              .bottom {
+                transform: translateY(32px) rotateX(-90deg);
+              }
+              
+              @media (min-width: 768px) {
+                .front { transform: translateZ(40px); }
+                .back { transform: translateZ(-40px) rotateY(180deg); }
+                .right { transform: translateX(40px) rotateY(90deg); }
+                .left { transform: translateX(-40px) rotateY(-90deg); }
+                .top { transform: translateY(-40px) rotateX(90deg); }
+                .bottom { transform: translateY(40px) rotateX(-90deg); }
+              }
+              
+              @keyframes rotate3d {
+                0% { transform: rotateX(0) rotateY(0); }
+                25% { transform: rotateX(90deg) rotateY(90deg); }
+                50% { transform: rotateX(180deg) rotateY(180deg); }
+                75% { transform: rotateX(270deg) rotateY(270deg); }
+                100% { transform: rotateX(360deg) rotateY(360deg); }
+              }
+            `}</style>
             
             {/* Based in text */}
             <span className="text-3xl md:text-5xl font-light italic text-gray-700">
@@ -328,6 +458,340 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
+      </section>
+
+      {/* Skills Cards Section */}
+      <section className="relative bg-white py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-5xl mx-auto"
+          >
+            <h2 className="text-left text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900">
+              I am good.{" "}In.
+            </h2>
+          </motion.div>
+
+          <div className="mt-12 md:mt-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            {[
+              {
+                title: 'Python programming.',
+                description:
+                  'Clean, reliable Python for automation, data workflows, and production-ready APIs.',
+                icon: FiCode,
+              },
+              {
+                title: 'Data engineering.',
+                description:
+                  'Pipelines, modeling, and tooling to move, transform, and validate data end-to-end.',
+                icon: FiDatabase,
+              },
+              {
+                title: 'Full stack web development.',
+                description:
+                  'Building complete features across UI, APIs, and integrations with solid fundamentals.',
+                icon: FiLayers,
+              },
+              {
+                title: 'Machine learning & AI.',
+                description:
+                  'Practical ML experiments and AI-powered experiences focused on outcomes and clarity.',
+                icon: FiCpu,
+              },
+            ].map((card, index) => (
+              <motion.div
+                key={card.title}
+                className="rounded-[36px] bg-gray-50 border border-gray-200 p-8 md:p-10 min-h-[240px] md:min-h-[260px]"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: 0.05 * index,
+                }}
+              >
+                <div className="text-blue-600">
+                  <card.icon className="w-7 h-7" />
+                </div>
+                <h3 className="mt-6 text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">
+                  {card.title}
+                </h3>
+                <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-600 max-w-md">
+                  {card.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Research & Writing Section */}
+      <section className="relative bg-white py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h2 className="text-right text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight text-gray-900">
+              I write research papers and technical articles.
+            </h2>
+            <p className="mt-10 md:mt-12 text-right text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed text-gray-600 max-w-5xl ml-auto">
+              to explore ideas deeply and share what I have learned.
+            </p>
+            <div className="mt-10 md:mt-12 flex justify-end">
+              <Link
+                to="/research"
+                className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-white text-base md:text-lg font-semibold"
+              >
+                Explore my research
+                <FiArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Research & Articles Cards */}
+      <section className="relative bg-white pb-24 md:pb-32">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <motion.div
+              className="rounded-[36px] bg-gray-50 overflow-hidden border border-gray-200"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="p-10 md:p-12 text-center">
+                <div className="text-base md:text-lg font-semibold text-gray-900">
+                  Research Work
+                </div>
+                <h3 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900">
+                  Research papers focused on real problems.
+                </h3>
+                <p className="mt-4 text-base md:text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
+                  Add your topic areas, a one-line thesis, tools/methods, and key outcomes (metrics, insights, or impact).
+                </p>
+                <div className="mt-8">
+                  <Link to="/research" className="text-blue-600 font-semibold">
+                    Learn more &gt;
+                  </Link>
+                </div>
+              </div>
+              <div className="h-72 md:h-80 bg-gray-200" />
+            </motion.div>
+
+            <motion.div
+              className="rounded-[36px] bg-gray-50 overflow-hidden border border-gray-200"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
+            >
+              <div className="p-10 md:p-12 text-center">
+                <div className="text-base md:text-lg font-semibold text-gray-900">
+                  Technical Articles
+                </div>
+                <h3 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900">
+                  Clear write-ups that teach and document.
+                </h3>
+                <p className="mt-4 text-base md:text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
+                  Add your platform link, categories (Python, ML, Data), and highlight what readers will learn in 3–5 bullets.
+                </p>
+                <div className="mt-8">
+                  <a href="#" className="text-blue-600 font-semibold" onClick={(e) => e.preventDefault()}>
+                    Learn more &gt;
+                  </a>
+                </div>
+              </div>
+              <div className="h-72 md:h-80 bg-gray-200" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Showcase Section - Horizontal Scroll */}
+      <section className="relative bg-white py-24 md:py-32 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h2 className="text-left text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4">
+              What real world problems{' '}
+              <span className="text-gray-500">
+                I solved through technology?
+              </span>
+            </h2>
+          </motion.div>
+
+          {/* Horizontal Scrolling Container */}
+          <div className="mt-12 relative">
+            <div className="overflow-x-auto hide-scrollbar" id="projects-scroll">
+              <div className="flex gap-6 pb-4">
+              {[
+                {
+                  title: 'Old Car Price Predictor',
+                  tag: 'Machine Learning',
+                  description:
+                    'Scraped real-world car data from Quikr.com and combined it with Kaggle datasets. Built a Linear Regression model boosted with AdaBoost, achieving R² ≈ 0.92. Deployed as a MERN-based web app on Vercel.',
+                  image: '/project-car-predictor.jpg',
+                  url: '',
+                },
+                {
+                  title: 'Sorting Algorithm Visualizer',
+                  tag: 'Web Application',
+                  description:
+                    'Interactive web app visualizing 9 sorting algorithms in real-time including Bubble Sort, Quick Sort, Merge Sort, and Heap Sort. Built with Node.js, Express.js, and Socket.IO.',
+                  image: '/project-sort-visualizer.jpg',
+                  url: 'https://sort-visualiser-chi.vercel.app/',
+                },
+                {
+                  title: 'AlumniConnect Application',
+                  tag: 'Full Stack Web App',
+                  description:
+                    'Built during 36-Hour Hackathon. Real-time mentorship platform with live chat, appointment scheduling, and role-based dashboards using MERN stack and Socket.io.',
+                  image: '/project-alumni-connect.png',
+                  url: 'https://houseofspirits.github.io/alumniconnect/',
+                },
+                {
+                  title: 'House Price Prediction',
+                  tag: 'Machine Learning',
+                  description:
+                    'Collected housing datasets from Kaggle. Performed EDA, feature engineering, and dimensionality reduction. Built Linear Regression model achieving R² ≈ 0.89 with AdaBoost on Django platform.',
+                  image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop',
+                  url: '',
+                },
+                {
+                  title: 'Excelify',
+                  tag: 'Full Stack Web App',
+                  description:
+                    'Full-stack MERN application for automated Excel data processing with secure uploads, JWT authentication, drag-and-drop uploader, and real-time data previews.',
+                  image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+                  url: '',
+                },
+                {
+                  title: 'CheckInn - Hotel Management',
+                  tag: 'Full Stack Web App',
+                  description:
+                    'Full-stack hotel booking system using MySQL, Node.js, and React. Optimized relational schemas, high-performance SQL queries, stored procedures, and triggers for real-time operations.',
+                  image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop',
+                  url: '',
+                },
+                {
+                  title: 'AI Therapist Application',
+                  tag: 'AI / Machine Learning',
+                  description:
+                    'Built during Code-A-Haunt Hackathon. AI-powered therapy chatbot using Python, Django, and Google AI Studio for personalized mental health support.',
+                  image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
+                  url: '',
+                },
+                {
+                  title: 'Online Weather Application',
+                  tag: 'Desktop Application',
+                  description:
+                    'Weather application using Java, AWT, Swing, and MySQL providing real-time weather updates and location-based forecasts with optimized query performance.',
+                  image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&h=600&fit=crop',
+                  url: '',
+                },
+              ].map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  className="flex-shrink-0 w-[400px] md:w-[480px] rounded-[36px] bg-white overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow cursor-pointer"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.05 * index,
+                  }}
+                  onClick={() => project.url && window.open(project.url, '_blank')}
+                >
+                  <div className="p-8 md:p-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        {project.tag}
+                      </div>
+                      {project.url && (
+                        <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+                          Live Demo
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 mb-4">
+                      {project.title}
+                    </h3>
+                    <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div className="h-64 md:h-80 overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            </div>
+            
+            {/* Scroll Indicator Arrow Button */}
+            <motion.button
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white border border-gray-300 rounded-full p-3 shadow-lg hover:bg-gray-50 transition-all z-10"
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              onClick={() => {
+                const scrollContainer = document.getElementById('projects-scroll');
+                scrollContainer?.scrollBy({ left: 400, behavior: 'smooth' });
+              }}
+              aria-label="Scroll right to see more projects"
+            >
+              <FiChevronRight className="w-6 h-6 text-gray-700" />
+            </motion.button>
+          </div>
+
+          {/* Explore Projects Button */}
+          <motion.div
+            className="mt-12 flex justify-end"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          >
+            <Link
+              to="/project"
+              className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-8 py-4 text-white text-base md:text-lg font-semibold hover:bg-gray-800 transition-colors"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Explore projects
+              <FiArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Hide scrollbar styles */}
+        <style jsx>{`
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
       </section>
 
       {/* White Section with Scrolling Text Animation */}
