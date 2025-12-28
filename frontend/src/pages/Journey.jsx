@@ -212,7 +212,7 @@ const Journey = () => {
                     <div className="lg:hidden text-4xl mb-4">{item.icon}</div>
 
                     {/* Content */}
-                    <div className="space-y-4">
+                    <div className="space-y-4 pr-24">
                       <div>
                         <h3 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
                           {item.title}
