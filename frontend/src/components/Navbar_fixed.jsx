@@ -12,6 +12,38 @@ const Navbar = () => {
 
   const navigation = [
     { 
+      name: 'Home', 
+      href: '/', 
+      current: location.pathname === '/',
+      dropdown: {
+        type: 'custom', // Special custom layout
+        sections: [
+          {
+            title: 'WELCOME',
+            items: [
+              { name: 'Welcome', href: '/' },
+              { name: 'About Me', href: '/about' },
+              { name: 'My Story', href: '/journey' },
+              { name: 'Skills Overview', href: '/about#skills' },
+              { name: 'Latest Updates', href: '/#updates' }
+            ]
+          },
+          {
+            title: 'QUICK LINKS',
+            items: [
+              { name: 'Portfolio Highlights', href: '/project' },
+              { name: 'Recent Work', href: '/work' },
+              { name: 'Contact Info', href: '/contact' }
+            ]
+          }
+        ],
+        rightContent: {
+          title: 'Building Tomorrow\'s Solutions Today',
+          description: 'A passionate developer crafting intelligent systems, scalable applications, and transformative digital experiences that bridge technology and innovation.'
+        }
+      }
+    },
+    { 
       name: 'Store', 
       href: '/store', 
       current: location.pathname === '/store',
@@ -558,8 +590,49 @@ const Navbar = () => {
       {activeDropdown && (
         <div className="fixed inset-x-0 top-11 bg-white/95 backdrop-blur-xl border-b border-gray-100 z-40 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {navigation.find(item => item.name === activeDropdown)?.dropdown.sections.map((section, index) => (
+            {/* Custom layout for Home dropdown */}
+            {activeDropdown === 'Home' ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" style={{ columnGap: '150px' }}>
+                {/* Left Side - Navigation Links */}
+                <div className="space-y-8">
+                  {navigation.find(item => item.name === 'Home')?.dropdown.sections.map((section, index) => (
+                    <div key={index}>
+                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                        {section.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {section.items.map((item, itemIndex) => (
+                          <li key={itemIndex}>
+                            <Link
+                              to={item.href}
+                              className="block text-xl font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Right Side - Large Descriptive Text */}
+                <div className="flex flex-col justify-center">
+                  <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+                    Building Tomorrow's{' '}
+                    <span className="text-blue-600">Solutions</span>{' '}
+                    Today
+                  </h2>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    A passionate developer crafting intelligent systems, scalable applications, and transformative digital experiences that bridge technology and innovation.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              // Default grid layout for other dropdowns
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {navigation.find(item => item.name === activeDropdown)?.dropdown.sections.map((section, index) => (
                 <div key={index} className="space-y-4">
                   <h3 
                     className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
@@ -584,6 +657,7 @@ const Navbar = () => {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </div>
       )}

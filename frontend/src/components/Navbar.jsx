@@ -620,43 +620,128 @@ const Navbar = ({ onLogoClick: triggerWaveEffect }) => {
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {navigation.find(item => item.name === activeDropdown)?.dropdown.sections.map((section, index) => (
+              {/* Custom layout for Home dropdown */}
+              {activeDropdown === 'Home' ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" style={{ columnGap: '150px' }}>
+                  {/* Left Side - Navigation Links (Welcome and Quick Links side by side) */}
+                  <div className="flex gap-8" style={{ gap: '150px' }}>
+                    {navigation.find(item => item.name === 'Home')?.dropdown.sections.map((section, index) => (
+                      <motion.div 
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                          {section.title}
+                        </h3>
+                        <ul className="space-y-2">
+                          {section.items.map((item, itemIndex) => (
+                            <motion.li 
+                              key={itemIndex}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.2, delay: (index * 0.1) + (itemIndex * 0.05) }}
+                            >
+                              <Link
+                                to={item.href}
+                                className="block text-xl font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200"
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                {item.name}
+                              </Link>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Right Side - Large Descriptive Text */}
                   <motion.div 
-                    key={index} 
-                    className="space-y-4"
-                    initial={{ opacity: 0, x: -20 }}
+                    className="flex flex-col justify-center"
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
                   >
-                    <h3 
-                      className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                      style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-                    >
-                      {section.title}
-                    </h3>
-                    <ul className="space-y-2">
-                      {section.items.map((item, itemIndex) => (
-                        <motion.li 
-                          key={itemIndex}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.2, delay: (index * 0.1) + (itemIndex * 0.05) }}
-                        >
-                          <Link
-                            to={item.href}
-                            className="text-sm text-gray-700 hover:text-black transition-all duration-200 block hover:bg-gray-50 rounded-md px-2 py-1 -mx-2 transform hover:scale-105"
-                            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-                            onClick={() => setActiveDropdown(null)}
-                          >
-                            {item.name}
-                          </Link>
-                        </motion.li>
-                      ))}
-                    </ul>
+                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+                      Building Tomorrow's{' '}
+                      <span className="text-blue-600">Solutions</span>{' '}
+                      Today
+                    </h2>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      A passionate developer crafting intelligent systems, scalable applications, and transformative digital experiences that bridge technology and innovation.
+                    </p>
                   </motion.div>
-                ))}
-              </div>
+                </div>
+              ) : (
+                // Default grid layout for other dropdowns - same structure as Home
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" style={{ columnGap: '150px' }}>
+                  {/* Left Side - Navigation Links (sections side by side) */}
+                  <div className="flex gap-8" style={{ gap: '150px' }}>
+                    {navigation.find(item => item.name === activeDropdown)?.dropdown.sections.map((section, index) => (
+                      <motion.div 
+                        key={index} 
+                        className="space-y-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <h3 
+                          className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
+                        >
+                          {section.title}
+                        </h3>
+                        <ul className="space-y-2">
+                          {section.items.map((item, itemIndex) => (
+                            <motion.li 
+                              key={itemIndex}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.2, delay: (index * 0.1) + (itemIndex * 0.05) }}
+                            >
+                              <Link
+                                to={item.href}
+                                className="text-sm text-gray-700 hover:text-black transition-all duration-200 block hover:bg-gray-50 rounded-md px-2 py-1 -mx-2 transform hover:scale-105"
+                                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                {item.name}
+                              </Link>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Right Side - Large Descriptive Text */}
+                  <motion.div 
+                    className="flex flex-col justify-center"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                  >
+                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+                      {activeDropdown === 'Journey' && 'My Professional Journey'}
+                      {activeDropdown === 'Project' && 'Innovative Projects'}
+                      {activeDropdown === 'Work' && 'Professional Experience'}
+                      {activeDropdown === 'Know Me' && 'Get to Know Me'}
+                      {activeDropdown === 'Vic-Story' && 'The Story Behind Vicky'}
+                      {activeDropdown === 'Research' && 'Research & Innovation'}
+                    </h2>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      {activeDropdown === 'Journey' && 'From learning fundamentals to mastering technologies, explore my career path, achievements, and continuous learning journey in the world of software development.'}
+                      {activeDropdown === 'Project' && 'Discover a portfolio of cutting-edge web applications, mobile solutions, and full-stack projects built with modern technologies and best practices.'}
+                      {activeDropdown === 'Work' && 'Explore my professional journey including current roles, past positions, freelance projects, and the comprehensive services I offer to clients worldwide.'}
+                      {activeDropdown === 'Know Me' && 'Beyond the code and projects, discover my personal interests, core values, hobbies, and the various ways you can connect with me across platforms.'}
+                      {activeDropdown === 'Vic-Story' && 'Dive deep into my personal narrative - from where it all began to the milestones achieved, challenges overcome, and the vision for what lies ahead.'}
+                      {activeDropdown === 'Research' && 'Explore my research initiatives spanning machine learning, data science, and emerging technologies. Read published papers and in-depth case studies.'}
+                    </p>
+                  </motion.div>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
